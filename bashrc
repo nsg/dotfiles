@@ -86,4 +86,43 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+# Set a default editor
 export EDITOR=vim
+
+# Commands to be executed before the prompt
+function left_prompt_command() {
+
+    local yellow="\033[00;33m"
+    local normal="\033[0m"
+
+    if [ -f /usr/bin/klist ]; then
+        /usr/bin/klist > /dev/null 2>&1
+        if [ $? == 0 ]; then
+            # awk code may cause problem i your principal is shorter
+            # than 7 characters (id@hostname).
+            echo -en "${yellow}$(klist | awk {'if(length($2)>7) {print $2}'} | awk -F @ '{print $1}') "
+        fi
+    fi
+
+    echo -en "$normal"
+
+}
+
+function right_prompt_command() {
+
+    local yellow="\033[00;33m"
+    local normal="\033[0m"
+
+    if [ -f /usr/bin/git ]; then
+        echo -en "${yellow}$(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
+    fi
+
+}
+
+function prompt_command() {
+    # Adds 8 to compensate to colors
+    printf "%*s\r" `expr $COLUMNS + 8` $(right_prompt_command)
+    left_prompt_command
+}
+
+PROMPT_COMMAND=prompt_command
