@@ -89,7 +89,10 @@ fi
 # Set a default editor
 export EDITOR=vim
 
-# Commands to be executed before the prompt
+##
+# PROMPT_COMMAND
+##
+
 function left_prompt_command() {
 
     local yellow="\033[00;33m"
@@ -110,19 +113,37 @@ function left_prompt_command() {
 
 function right_prompt_command() {
 
-    local yellow="\033[00;33m"
-    local normal="\033[0m"
-
     if [ -f /usr/bin/git ]; then
-        echo -en "${yellow}$(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
+        echo -en "$(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
     fi
+
+    if [ -f /usr/bin/svn ]; then
+        /usr/bin/svn info > /dev/null 2>&1
+        if [ $? == 0 ]; then
+            echo -n "r$(/usr/bin/svn info | grep Revision: | awk '{print $2}')"
+        fi
+    fi
+
+    echo -en "$normal"
 
 }
 
 function prompt_command() {
-    # Adds 8 to compensate to colors
-    printf "%*s\r" `expr $COLUMNS + 8` $(right_prompt_command)
+    printf "%*s\r" $COLUMNS $(right_prompt_command)
     left_prompt_command
 }
 
 PROMPT_COMMAND=prompt_command
+
+##
+# Kerberos
+##
+
+function kinit() {
+    if [[ $1 =~ "admin" ]]; then
+        echo "(--no-f added)"
+        /usr/bin/kinit --no-f $@
+    else
+        /usr/bin/kinit $@
+    fi
+}
