@@ -50,3 +50,9 @@ subfont-osd-scale=4.4
 # Starta efter 4% (2Mb)
 cache=51200
 cache-min=4
+
+# Set soft volume
+# def: 1 (normal)
+# max: 400 (400%)
+softvol=1
+softvol-max=400
