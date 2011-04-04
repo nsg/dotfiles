@@ -111,6 +111,7 @@ function left_prompt_command() {
 function right_prompt_command() {
 
     local yellow=$(tput setaf 3)
+    local white=$(tput setaf 7)
 
     echo -en $yellow
 
@@ -127,10 +128,12 @@ function right_prompt_command() {
         fi
     fi
 
+    echo -en " $white[$1]"
+
 }
 
 function prompt_command() {
-    local r_prompt="$(right_prompt_command)"
+    local r_prompt="$(right_prompt_command $?)"
     r_prompt_plain="$(echo $r_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g')"
     tput sc
     tput cuf $(expr $COLUMNS - ${#r_prompt_plain})
