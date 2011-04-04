@@ -95,8 +95,7 @@ export EDITOR=vim
 
 function left_prompt_command() {
 
-    local yellow="\033[00;33m"
-    local normal="\033[0m"
+    local yellow=$(tput setaf 3)
 
     if [ -f /usr/bin/klist ]; then
         /usr/bin/klist > /dev/null 2>&1
@@ -107,11 +106,13 @@ function left_prompt_command() {
         fi
     fi
 
-    echo -en "$normal"
-
 }
 
 function right_prompt_command() {
+
+    local yellow=$(tput setaf 3)
+
+    echo -en $yellow
 
     if [ -f /usr/bin/git ]; then
         echo -en "$(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
@@ -124,12 +125,15 @@ function right_prompt_command() {
         fi
     fi
 
-    echo -en "$normal"
-
 }
 
 function prompt_command() {
-    printf "%*s\r" $COLUMNS $(right_prompt_command)
+    local r_prompt="$(right_prompt_command)"
+    r_prompt_plain="$(echo $r_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g')"
+    tput sc
+    tput cuf $(expr $COLUMNS - ${#r_prompt_plain})
+    echo $r_prompt
+    tput rc
     left_prompt_command
 }
 
