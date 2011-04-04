@@ -115,7 +115,9 @@ function right_prompt_command() {
     echo -en $yellow
 
     if [ -f /usr/bin/git ]; then
-        echo -en "$(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
+        echo -en "($(git branch | grep \* | awk '{print $2}')"
+        echo -en $yellow
+        echo -en ") $(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
     fi
 
     if [ -f /usr/bin/svn ]; then
