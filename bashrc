@@ -159,3 +159,25 @@ function kinit() {
         /usr/bin/kinit $@
     fi
 }
+
+##
+# Bash completions
+##
+
+function __rtl() {
+    local cur list
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+
+    if [[ $cur == -* ]]; then
+        list="$(rtl --params)"
+        COMPREPLY=( $(compgen -W "${list}" -- ${cur}) )
+    else
+        list="$(rtl --files | awk -F '\t' '{print $2}' | head -15)"
+        COMPREPLY=( $(compgen -W "${list}" -- ${cur}) )
+    fi
+
+    return 0
+}
+
+complete -F __rtl rtl
