@@ -116,9 +116,12 @@ function right_prompt_command() {
     echo -en $yellow
 
     if [ -f /usr/bin/git ]; then
-        echo -en "($(git branch | grep \* | awk '{print $2}')"
-        echo -en $yellow
-        echo -en ") $(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
+        /usr/bin/git status > /dev/null 2>&1
+        if [ $? == 0 ]; then
+            echo -en "($(git branch | grep \* | awk '{print $2}')"
+            echo -en $yellow
+            echo -en ") $(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
+        fi
     fi
 
     if [ -f /usr/bin/svn ]; then
@@ -137,7 +140,7 @@ function prompt_command() {
     r_prompt_plain="$(echo $r_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g')"
     tput sc
     tput cuf $(expr $COLUMNS - ${#r_prompt_plain})
-    echo $r_prompt
+    echo -en $r_prompt
     tput rc
     left_prompt_command
 }
