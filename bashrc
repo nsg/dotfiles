@@ -10,6 +10,8 @@ export EDITOR=vim
 shopt -s histappend
 shopt -s checkwinsize
 
+set completion-ignore-case on
+
 ##
 # Lesspipe
 ##
@@ -135,7 +137,7 @@ function __rtl() {
         list="$(rtl --params)"
         COMPREPLY=( $(compgen -W "${list}" -- ${cur}) )
     else
-        list="$(rtl --files | awk -F '\t' '{print $2}' | head -15)"
+        list="$(rtl --plain | awk -F '\t' '{print $2}' | head -15)"
         COMPREPLY=( $(compgen -W "${list}" -- ${cur}) )
     fi
 
