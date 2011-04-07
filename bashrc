@@ -10,8 +10,6 @@ export EDITOR=vim
 shopt -s histappend
 shopt -s checkwinsize
 
-set completion-ignore-case on
-
 ##
 # Lesspipe
 ##
