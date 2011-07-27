@@ -113,6 +113,7 @@ fi
 ##
 
 alias ll='ls -l'
+alias o='gnome-open'
 
 ##
 # Completion
