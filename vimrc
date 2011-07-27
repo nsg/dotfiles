@@ -3,8 +3,8 @@
 set nocompatible
 set autoindent
 set smartindent
-set shiftwidth=4
-set softtabstop=4
+"set shiftwidth=4
+"set softtabstop=4
 set showmatch
 set incsearch
 
@@ -14,7 +14,7 @@ set cursorcolumn
 set cursorline
 
 set number
-set expandtab
+"set expandtab
 set shiftround
 
 set foldenable
