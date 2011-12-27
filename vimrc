@@ -3,18 +3,15 @@
 set nocompatible
 set autoindent
 set smartindent
-"set shiftwidth=4
-"set softtabstop=4
 set showmatch
 set incsearch
 
 set background=dark
 
-set cursorcolumn
+"set cursorcolumn
 set cursorline
 
 set number
-"set expandtab
 set shiftround
 
 set foldenable
@@ -33,5 +30,6 @@ syntax on
 
 colorscheme desert
 
-au BufRead,BufNewFile *.rb,*.rhtml set shiftwidth=2
-au BufRead,BufNewFile *.rb,*.rhtml set softtabstop=2
+set ts=4 sts=4 sw=4 noexpandtab
+
+au BufRead,BufNewFile *.rb,*.rhtml,*.cpp,*.h set sts=2 sw=2 expandtab
