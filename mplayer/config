@@ -56,3 +56,6 @@ cache-min=4
 # max: 400 (400%)
 softvol=1
 softvol-max=200
+
+# VIDIX, mga_vid, DGA, VESA, or fbdev
+#vo=xv
