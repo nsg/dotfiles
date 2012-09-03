@@ -32,4 +32,4 @@ colorscheme desert
 
 set ts=4 sts=4 sw=4 noexpandtab
 
-au BufRead,BufNewFile *.rb,*.rhtml,*.cpp,*.h set sts=2 sw=2 expandtab
+au BufRead,BufNewFile *.rb,*.rhtml set sts=2 sw=2 expandtab
