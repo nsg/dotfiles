@@ -157,3 +157,44 @@ function kinit() {
         /usr/bin/kinit $@
     fi
 }
+
+##
+# Stacken
+##
+
+function stacken() {
+    local OPTIND
+    local OPTARG
+    local OPTNAME
+    while getopts ":rs:dc" OPTNAME; do
+        case $OPTNAME in
+            r)
+                export KRB5CCNAME="/tmp/krb5cc_stacken_root"
+                if [ ! -f $KRB5CCNAME ]; then
+                    kinit nsg/root
+                    if [ $? != 0 ]; then
+                        rm -v $KRB5CCNAME
+                        unset KRB5CCNAME
+                    fi
+                fi
+                ;;
+            s)
+                ssh -l root $OPTARG
+                ;;
+            d)
+                rm -v $KRB5CCNAME
+                ;;
+            c)
+                unset KRB5CCNAME
+                ;;
+            "?")
+                echo "Unknown option $OPTARG"
+                ;;
+            ":")
+                echo "No argument value for option $OPTARG"
+                ;;
+            *)
+                echo "Error"
+        esac
+    done
+}
