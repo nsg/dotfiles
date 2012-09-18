@@ -159,36 +159,82 @@ function kinit() {
 }
 
 ##
-# Stacken
+# Kerberos
 ##
 
-function stacken() {
+function krb() {
     local OPTIND
     local OPTARG
     local OPTNAME
-    while getopts ":rs:dc" OPTNAME; do
+    while getopts ":rac:s:dDhg" OPTNAME; do
         case $OPTNAME in
             r)
-                export KRB5CCNAME="/tmp/krb5cc_stacken_root"
+                KRB_TYPE=/root
+                ;;
+            a)
+                KRB_TYPE=/admin
+                ;;
+            g)
+                KRB_GLOBAL=true
+                ;;
+            c)
+
+                # Select cell
+                if [[ $OPTARG == nsg ]]; then
+                    local cell=@STACKEN.KTH.SE
+                elif [[ $OPTARG == stefan ]]; then
+                    local cell=@SOUTHPOLE.SE
+                fi
+
+                # Local och global namespace
+                if [[ -z $KRB_GLOBAL ]]; then
+                    export KRB5CCNAME="/tmp/krb5cc_${cell/@/}_${KRB_TYPE/\//}"
+                else
+                    export KRB5CCNAME="/tmp/krb5cc_$UID"
+                fi
+
+                # Check for expired tickets
+                klist | grep Expired -q
+                if [ $? == 0 ]; then 
+                    rm $KRB5CCNAME
+                    echo "Expired credentials, old credentials removed."
+                fi
+
+                # Check out a ticket (if needed)
                 if [ ! -f $KRB5CCNAME ]; then
-                    kinit nsg/root
+                    kinit ${OPTARG}${KRB_TYPE}${cell}
+
                     if [ $? != 0 ]; then
-                        rm -v $KRB5CCNAME
+                        rm $KRB5CCNAME
                         unset KRB5CCNAME
                     fi
                 fi
+
+                # Clean up
+                unset KRB_TYPE
+                unset KRB_GLOBAL
                 ;;
             s)
                 ssh -l root $OPTARG
                 ;;
-            d)
+            D)
                 rm -v $KRB5CCNAME
-                ;;
-            c)
                 unset KRB5CCNAME
+                ;;
+            d)
+                unset KRB5CCNAME
+                ;;
+            h)
+                echo "-c nsg       check out nsg@STACKEN.KTH.SE"
+                echo "-rc stefan   check out stefan/root@SOUTHPOLE.SE"
+                echo "-ac stefan   check out stefan/admin@SOUTHPOLE.SE"
+                echo "-gc stefan   check out stefan@SOUTHPOLE.SE to global namespace"
+                echo "-d           return to global namespace"
+                echo "-D           return to global namespace AND destory ticket"
                 ;;
             "?")
                 echo "Unknown option $OPTARG"
+                echo "Use -h for help"
                 ;;
             ":")
                 echo "No argument value for option $OPTARG"
