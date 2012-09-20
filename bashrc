@@ -166,7 +166,7 @@ function krb() {
     local OPTIND
     local OPTARG
     local OPTNAME
-    while getopts ":rac:s:dDhg" OPTNAME; do
+    while getopts ":rac:s:dDhgl" OPTNAME; do
         case $OPTNAME in
             r)
                 KRB_TYPE=/root
@@ -224,6 +224,17 @@ function krb() {
             d)
                 unset KRB5CCNAME
                 ;;
+            l)
+                for t in $(ls -1 /tmp/krb5cc_*); do
+                    KRB5CCNAME=$t klist | grep Expired -q
+                    if [ $? == 0 ]; then
+                        echo -n "[Expired] "
+                    else
+                        echo -n "[Valid]   "
+                    fi
+                    echo $t
+                done
+                ;;
             h)
                 echo "-c nsg       check out nsg@STACKEN.KTH.SE"
                 echo "-rc stefan   check out stefan/root@SOUTHPOLE.SE"
@@ -231,6 +242,7 @@ function krb() {
                 echo "-gc stefan   check out stefan@SOUTHPOLE.SE to global namespace"
                 echo "-d           return to global namespace"
                 echo "-D           return to global namespace AND destory ticket"
+                echo "-l           list principals"
                 ;;
             "?")
                 echo "Unknown option $OPTARG"
