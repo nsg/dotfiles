@@ -45,7 +45,7 @@ case "$TERM" in
         ;;
 esac
 
-function left_prompt_command() {
+function pre_prompt() {
 
     local yellow=$(tput setaf 3)
 
@@ -54,13 +54,13 @@ function left_prompt_command() {
         if [ $? == 0 ]; then
             # awk code may cause problem i your principal is shorter
             # than 7 characters (id@hostname).
-            echo -en "${yellow}$(klist | awk {'if(length($2)>7) {print $2}'} | awk -F @ '{print $1}') "
+            echo -en "${yellow}$(krb -v) "
         fi
     fi
 
 }
 
-function right_prompt_command() {
+function post_prompt() {
 
     local yellow=$(tput setaf 3)
     local white=$(tput setaf 7)
@@ -68,8 +68,7 @@ function right_prompt_command() {
     echo -en $yellow
 
     if [ -f /usr/bin/git ]; then
-        /usr/bin/git status > /dev/null 2>&1
-        if [ $? == 0 ]; then
+        if [ -d .git ] || [ git rev-parse --git-dir 2> /dev/null ]; then
             echo -en "($(git branch | grep \* | awk '{print $2}')"
             echo -en $yellow
             echo -en ") $(git config -l | grep remote.origin.url | awk -F : '{print $2}')"
@@ -77,27 +76,24 @@ function right_prompt_command() {
     fi
 
     if [ -f /usr/bin/svn ]; then
-        /usr/bin/svn info > /dev/null 2>&1
-        if [ $? == 0 ]; then
+        if [ -d .svn ]; then
             echo -n "r$(/usr/bin/svn info | grep Revision: | awk '{print $2}')"
         fi
     fi
 
-    echo -en " $white[$1]"
+    echo -en "$white"
+    [ $1 != 0 ] && echo -n " r:$1"
+    [ -n "$(jobs)" ] && echo -n " j:\j"
+
 
 }
 
 function prompt_command() {
-    local r_prompt="$(right_prompt_command $?)"
-    r_prompt_plain="$(echo $r_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g')"
-    tput sc
-    tput cuf $(expr $COLUMNS - ${#r_prompt_plain})
-    echo -en $r_prompt
-    tput rc
-    left_prompt_command
+    set_prompt
 }
 
 PROMPT_COMMAND=prompt_command
+
 
 ##
 # ls
@@ -166,7 +162,7 @@ function krb() {
     local OPTIND
     local OPTARG
     local OPTNAME
-    while getopts ":rac:s:dDhgl" OPTNAME; do
+    while getopts ":rac:s:dDhglv" OPTNAME; do
         case $OPTNAME in
             r)
                 KRB_TYPE=/root
@@ -226,14 +222,22 @@ function krb() {
                 ;;
             l)
                 for t in $(ls -1 /tmp/krb5cc_*); do
-                    KRB5CCNAME=$t klist | grep Expired -q
+                    KRB5CCNAME=$t klist -t
                     if [ $? == 0 ]; then
-                        echo -n "[Expired] "
-                    else
                         echo -n "[Valid]   "
+                    else
+                        echo -n "[Expired] "
                     fi
                     echo $t
                 done
+                ;;
+            v)
+                if [ -f $KRB5CCNAME ]; then
+                    klist -t
+                    if [ $? == 0 ]; then
+                        klist | grep Principal: | awk '{print $NF}' | awk -F@ '{print $1}'
+                    fi
+                fi
                 ;;
             h)
                 echo "-c nsg       check out nsg@STACKEN.KTH.SE"
@@ -243,6 +247,7 @@ function krb() {
                 echo "-d           return to global namespace"
                 echo "-D           return to global namespace AND destory ticket"
                 echo "-l           list principals"
+                echo "-v           Current principal (short form)."
                 ;;
             "?")
                 echo "Unknown option $OPTARG"
@@ -255,4 +260,22 @@ function krb() {
                 echo "Error"
         esac
     done
+}
+
+##
+# Set the pre and post prompt
+##
+
+function set_prompt() {
+    local r_prompt="$(post_prompt $?)"
+    local l_prompt="$(pre_prompt)"
+
+    if [ -z "$PS1_ORIG" ]; then
+        PS1_ORIG=$PS1
+    fi
+
+    r_prompt_plain="$(echo $r_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g')"
+    _cols_to_move=$(expr $COLUMNS - ${#r_prompt_plain})
+
+    PS1="${l_prompt}$PS1_ORIG\[\e[s\e[$LINES;$(echo -n $_cols_to_move)H${r_prompt}\e[u\]"
 }
