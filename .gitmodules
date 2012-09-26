@@ -1,0 +1,3 @@
+[submodule "secret"]
+	path = secret
+	url = git@bitbucket.org:nsg/dotfiles.git
