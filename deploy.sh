@@ -12,5 +12,5 @@ for obj in `dirname $0`/*; do
 	ln -s $obj $HOME/.`basename $obj`
 done
 
-# Deploy special filed
+# Deploy special files
 ln -s `dirname $0`/ssh/config $HOME/.ssh/config
