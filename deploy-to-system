@@ -6,11 +6,11 @@ read
 
 # Deploy normal files
 for obj in `dirname $0`/*; do
-	if [[ $obj =~ deploy.sh ]]; then continue; fi
+	if [[ $obj =~ deploy-to-system ]]; then continue; fi
 	if [[ $obj =~ README ]]; then continue; fi
-	if [[ $obj =~ ssh ]]; then continue; fi
+	if [[ $obj =~ secret ]]; then continue; fi
 	ln -s $obj $HOME/.`basename $obj`
 done
 
 # Deploy special files
-ln -s `dirname $0`/ssh/config $HOME/.ssh/config
+echo ln -s $HOME/.dotfiles/secret/ssh/config $HOME/.ssh/config
