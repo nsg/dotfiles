@@ -277,5 +277,5 @@ function set_prompt() {
     r_prompt_plain="$(echo $r_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g')"
     _cols_to_move=$(expr $COLUMNS - ${#r_prompt_plain})
 
-    PS1="${l_prompt}$PS1_ORIG\[\e[s\e[$LINES;$(echo -n $_cols_to_move)H${r_prompt}\e[u\]"
+    PS1="${l_prompt%%}$PS1_ORIG\[\e[s\e[$LINES;$(echo -n $_cols_to_move)H${r_prompt}\e[u\]"
 }
