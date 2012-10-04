@@ -47,7 +47,7 @@ esac
 
 function pre_prompt() {
 
-    local yellow=$(tput setaf 3)
+    local yellow="\[$(tput setaf 3)\]"
 
     if [ -f /usr/bin/klist ]; then
         /usr/bin/klist > /dev/null 2>&1
@@ -285,15 +285,15 @@ function krb() {
 ##
 
 function set_prompt() {
-    local r_prompt="$(post_prompt $?)"
-    local l_prompt="$(pre_prompt)"
-
     if [ -z "$PS1_ORIG" ]; then
         PS1_ORIG=$PS1
     fi
 
-    r_prompt_plain="$(echo $r_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g')"
-    _cols_to_move=$(expr $COLUMNS - ${#r_prompt_plain})
+    local r_prompt="$(post_prompt $?)"
+    local l_prompt="$(pre_prompt)"
 
-    PS1="${l_prompt%%}$PS1_ORIG\[\e[s\e[$LINES;$(echo -n $_cols_to_move)H${r_prompt}\e[u\]"
+    r_prompt_plain="$(echo $r_prompt | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g')"
+    _cols_to_move=$(( $COLUMNS - ${#r_prompt_plain} ))
+
+    PS1="${l_prompt}${PS1_ORIG}\[\033[s\033[$LINES;$(echo -n $_cols_to_move)H${r_prompt}\033[u\]"
 }
