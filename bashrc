@@ -52,8 +52,6 @@ function pre_prompt() {
     if [ -f /usr/bin/klist ]; then
         /usr/bin/klist > /dev/null 2>&1
         if [ $? == 0 ]; then
-            # awk code may cause problem i your principal is shorter
-            # than 7 characters (id@hostname).
             echo -en "${yellow}$(krb -v) "
         fi
     fi
