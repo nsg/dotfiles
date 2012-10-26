@@ -8,9 +8,8 @@ read
 for obj in `dirname $0`/*; do
 	if [[ $obj =~ deploy-to-system ]]; then continue; fi
 	if [[ $obj =~ README ]]; then continue; fi
-	if [[ $obj =~ secret ]]; then continue; fi
 	ln -s $obj $HOME/.`basename $obj`
 done
 
-# Deploy special files
-echo ln -s $HOME/.dotfiles/secret/ssh/config $HOME/.ssh/config
+# Deploy secret files (from separate private repository)
+echo ln -s $HOME/.dotfiles-secret/ssh/config $HOME/.ssh/config
