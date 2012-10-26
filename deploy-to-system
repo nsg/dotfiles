@@ -12,4 +12,4 @@ for obj in `dirname $0`/*; do
 done
 
 # Deploy secret files (from separate private repository)
-echo ln -s $HOME/.dotfiles-secret/ssh/config $HOME/.ssh/config
+ln -s $HOME/.dotfiles-secret/ssh/config $HOME/.ssh/config
