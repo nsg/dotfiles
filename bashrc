@@ -10,6 +10,16 @@ export EDITOR=vim
 shopt -s histappend
 shopt -s checkwinsize
 
+###
+# ENV
+##
+
+exec 3>&1
+exec > /dev/null
+[ -f $HOME/code/southpole/ansible/hacking/env-setup ] && \
+	. $HOME/code/southpole/ansible/hacking/env-setup
+exec >&3
+
 ##
 # Lesspipe
 ##
