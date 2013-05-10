@@ -55,6 +55,10 @@ case "$TERM" in
         ;;
 esac
 
+function ssh-nk() {
+	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $@
+}
+
 function pre_prompt() {
 
     local yellow="\[$(tput setaf 3)\]"
