@@ -1,15 +1,23 @@
 #!/bin/bash
 
-echo "Press enter to deploy `dirname $0` to $HOME"
-echo -n "Type ctrl-c to abort "
-read
+IGNORE="deploy-to-system README"
 
-# Deploy normal files
+if [ ! -d "$HOME/.dotfiles/private" ]; then
+	echo "Error: You need to have the private files in $HOME/.dotfiles/private"
+	exit 1;
+fi
+
+if [ ! -d "$HOME/.dotfiles/public" ]; then
+	echo "Error: You need to have the private files in $HOME/.dotfiles/public"
+	exit 1;
+fi
+
+SCRIPT_PATH=$(dirname $0)
 for obj in `dirname $0`/*; do
-	if [[ $obj =~ deploy-to-system ]]; then continue; fi
-	if [[ $obj =~ README ]]; then continue; fi
-	ln -s $obj $HOME/.`basename $obj`
+	if [[ $IGNORE =~ $(basename $obj) ]]; then continue; fi
+	ln -sf $HOME/.dotfiles/public/$(basename $obj) $HOME/.`basename $obj`
 done
 
-# Deploy secret files (from separate private repository)
-ln -s $HOME/.dotfiles-secret/ssh/config $HOME/.ssh/config
+ln -sf $HOME/.dotfiles/private/ssh/config $HOME/.ssh/config
+
+mkdir -p $HOME/.vim/{backup,tmp}
