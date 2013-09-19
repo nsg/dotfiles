@@ -7,6 +7,9 @@ export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 export HISTCONTROL=ignoreboth
 export EDITOR=vim
 
+# Add to PATH
+PATH=~/bin:$PATH
+
 shopt -s histappend
 shopt -s checkwinsize
 
