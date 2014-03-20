@@ -1,0 +1,22 @@
+---
+
+# This ansible file is used to deploy the dotfiles
+# example, deploy to local system:
+# ansible-playbook -c local -i localhost_inventory site.yml
+
+- hosts: all
+  tasks:
+  - name: Make sure we have the needed directories
+    file: path=~/.{{ item }} state=directory
+    with_items:
+    - vim
+    - vim/backup
+    - vim/tmp
+    - mplayer
+  - name: Deploy {{ item }}
+    copy: src={{ item }} dest=~/.{{ item }}
+    with_items:
+    - bashrc
+    - inputrc
+    - vimrc
+    - mplayer/config

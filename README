@@ -1,7 +1,4 @@
 Hi, this is some of my .dotfiles
 
-bashrc              - My default bashrc (shell)
-vimrc               - Config for VIM (editor)
-mplayer/config      - Config for mplayer (media player)
-inputrc	            - Config for readline/bash
-secret              - Secret stuff (in a private repository)
+Deploy this with ansible, for example:
+$ ansible-playbook -c local -i localhost_inventory site.yml
