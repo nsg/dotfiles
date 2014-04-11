@@ -1,0 +1,21 @@
+---
+
+- name: Check for NERDTree
+  shell: test -d vim/nerdtree_plugin
+  register: nerdtree_installed
+- name: Create directory {{ item }} for NERDTree
+  file: path=~/.{{ item }} state=directory
+  with_items:
+  - vim/nerdtree_plugin
+  - vim/plugin
+  - vim/syntax
+  when: nerdtree_installed
+- name: Deploy files {{ item }} for NERDTree
+  copy: src={{ item }} dest=~/.{{ item }}
+  with_items:
+  - vim/doc/NERD_tree.txt
+  - vim/nerdtree_plugin/exec_menuitem.vim
+  - vim/nerdtree_plugin/fs_menu.vim
+  - vim/plugin/NERD_tree.vim
+  - vim/syntax/nerdtree.vim
+  when: nerdtree_installed

@@ -12,11 +12,13 @@
     - vim
     - vim/backup
     - vim/tmp
+    - vim/doc
     - mplayer
-  - name: Deploy {{ item }}
+  - name: Deploy files {{ item }}
     copy: src={{ item }} dest=~/.{{ item }}
     with_items:
     - bashrc
     - inputrc
     - vimrc
     - mplayer/config
+  - include: vim_plugins.yml
