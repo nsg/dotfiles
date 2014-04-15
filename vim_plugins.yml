@@ -3,14 +3,14 @@
 - name: Check for NERDTree
   shell: test -d vim/nerdtree_plugin
   register: nerdtree_installed
-- name: Create directory {{ item }} for NERDTree
+- name: Create directories for NERDTree
   file: path=~/.{{ item }} state=directory
   with_items:
   - vim/nerdtree_plugin
   - vim/plugin
   - vim/syntax
   when: nerdtree_installed
-- name: Deploy files {{ item }} for NERDTree
+- name: Deploy files for NERDTree
   copy: src={{ item }} dest=~/.{{ item }}
   with_items:
   - vim/doc/NERD_tree.txt
