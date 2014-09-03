@@ -57,3 +57,4 @@ colorscheme desert
 set ts=4 sts=4 sw=4 noexpandtab
 
 au BufRead,BufNewFile *.rb,*.rhtml,*.yml,Vagrantfile set sts=2 sw=2 expandtab
+au BufNewFile,BufRead *.gradle setf groovy
