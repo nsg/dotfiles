@@ -1,14 +1,16 @@
 #!/bin/bash
 
 message() {
-	echo
 	echo "$1"
-	echo
 }
 
 if ! type pip; then
-	message "Install packages needed by ansible"
+	message "Install python-pip"
 	sudo apt-get install python-pip
+fi
+
+if ! type ansible; then
+	message "Install ansible"
 	sudo pip install ansible
 fi
 
