@@ -1,20 +1,10 @@
 "# .vimrc
 
 ""
-" Vundle settings
+"  pathogen settings
 ""
-
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'chase/vim-ansible-yaml', {'pinned': 1}	" 4634e5432c5230dbb2653ffc38413771ec1ccfd9
-Plugin 'scrooloose/nerdtree', {'pinned': 1}		" 4.2.0
-Plugin 'kien/ctrlp.vim', {'pinned': 1},			" 1.79
-
-call vundle#end()
+execute pathogen#infect()
+syntax on
 filetype plugin indent on
 
 ""
@@ -25,6 +15,7 @@ filetype plugin indent on
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+set nocompatible
 set autoindent
 set smartindent
 set showmatch

@@ -1,21 +1,26 @@
 ---
 
-- name: Check for NERDTree
-  shell: test -d vim/nerdtree_plugin
-  register: nerdtree_installed
-- name: Create directories for NERDTree
-  file: path=~/.{{ item }} state=directory
+- name: Clone pathogen.vim
+  git:
+    repo: "https://github.com/tpope/vim-pathogen.git"
+    dest: "~/.vim/git/pathogen.vim"
+    version: bd0c1abcce2acd46330c6edb15457f3f56677e5a # v2.3
+- name: Install pathogen.vim
+  command: mv ~/.vim/git/pathogen.vim/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim creates="~/.vim/autoload/pathogen.vim"
+
+- name: Clone plugins for Vundle to manage
+  git:
+    repo: "{{ item.path }}"
+    dest: "~/.vim/bundle/{{ item.name }}"
+    version: "{{ item.version }}"
   with_items:
-  - vim/nerdtree_plugin
-  - vim/plugin
-  - vim/syntax
-  when: nerdtree_installed
-- name: Deploy files for NERDTree
-  copy: src={{ item }} dest=~/.{{ item }}
-  with_items:
-  - vim/doc/NERD_tree.txt
-  - vim/nerdtree_plugin/exec_menuitem.vim
-  - vim/nerdtree_plugin/fs_menu.vim
-  - vim/plugin/NERD_tree.vim
-  - vim/syntax/nerdtree.vim
-  when: nerdtree_installed
+    - path: https://github.com/chase/vim-ansible-yaml.git
+      name: vim-ansible-yaml
+      version: 85bec55a1390e59c4fec3e79f961a95f77b30337
+    - path: https://github.com/scrooloose/nerdtree.git
+      name: nerdtree
+      version: 205367ab3f46dcc88b6ebb819a276e793a21e995 # 4.2.0
+    - path: https://github.com/kien/ctrlp.vim.git
+      name: ctrlp
+      version: c1646e3c28d75bcc834af4836f4c6e12296ba891 # 1.79
+      

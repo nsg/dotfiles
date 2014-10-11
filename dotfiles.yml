@@ -2,7 +2,7 @@
 
 # This ansible file is used to deploy the dotfiles
 # example, deploy to local system:
-# ansible-playbook -c local -i localhost_inventory site.yml
+# ansible-playbook -c local -i 127.0.0.1, site.yml
 
 - hosts: all
   sudo: no
@@ -15,6 +15,7 @@
     - vim/backup
     - vim/tmp
     - vim/doc
+    - vim/autoload
     - mplayer
     - .config
     - .config/terminator
