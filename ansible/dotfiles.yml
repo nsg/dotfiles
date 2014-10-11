@@ -20,7 +20,7 @@
     - .config
     - .config/terminator
   - name: Deploy files
-    copy: src={{ item }} dest=~/.{{ item }}
+    copy: src=../{{ item }} dest=~/.{{ item }}
     with_items:
     - bashrc
     - inputrc
