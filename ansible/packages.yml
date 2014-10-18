@@ -5,9 +5,9 @@
   vars:
     debs:
     - { 
-        url: "https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.2_x86_64.deb", 
-        name: "vagrant_1.5.2_x86_64.deb",
-        sha256sum: "bd20d89df7e33984614092b25864b530d4b73d4db1d04eab396f0457c184b6d7"
+        url: "https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb", 
+        name: "vagrant_1.6.5_x86_64.deb",
+        sha256sum: "e2c7af6d032ac551ebd6399265cb9cb64402c9fb96a12289161b7f67afada28a"
       }
     packages:
     - { 
@@ -28,12 +28,12 @@
     - virtualbox
     - curl
     - sshpass
-#  - name: Download debs
-#    get_url: url={{ item.url }} dest=/tmp/{{ item.name }} sha256sum="{{ item.sha256sum }}"
-#    with_items: debs
+  - name: Download debs
+    get_url: url={{ item.url }} dest=/tmp/{{ item.name }} sha256sum="{{ item.sha256sum }}"
+    with_items: debs
 #  - name: Download packages
 #    get_url: url={{ item.url }} dest=/tmp/{{ item.name }} sha256sum="{{ item.sha256sum }}"
 #    with_items: packages
-#  - name: Install debs
-#    command: dpkg -iE /tmp/{{ item.name }}
-#    with_items: debs
+  - name: Install debs
+    apt: deb=/tmp/{{ item.name }}
+    with_items: debs
