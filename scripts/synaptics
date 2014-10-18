@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# This configuration is designed to work with my Asus Zenbook UX31A
+# 2 finger scrolling, 2 finger right click and 3 finger middle click.
+# All soft buttons disabled
+
+# Whether  the  device  is  a  click  pad.  A click pad device has
+# button(s) integrated into the touchpad surface.  The  user  must
+# press  downward  on  the touchpad in order to generated a button
+# press.
+xinput set-prop "ETPS/2 Elantech Touchpad" "Synaptics ClickPad" 1
+
+# Coordinates of right and middle soft buttons
+# Soft buttons disabled
+xinput set-prop "ETPS/2 Elantech Touchpad" "Synaptics Soft Button Areas" \
+	0 0 0 0 0 0 0 0
+# Default:
+#	1956 0 1737 0 1304 1955 1737 0
+
+# 8 bit, up to MAX_TAP values (see  synaptics.h),  0  disables  an 
+# element. order: RT, RB, LT, LB, F1, F2, F3.
+# Disable all corner buttons
+xinput set-prop "ETPS/2 Elantech Touchpad" "Synaptics Tap Action" \
+	0 0 0 0 0 0 0
+# Default:
+#	2 3 0 0 1 3 0
+
+# Enable multitouch clicks
+# 1 finger: left click
+# 2 finger: right click
+# 3 finger: middle click
+xinput set-prop "ETPS/2 Elantech Touchpad" "Synaptics Click Action" \
+	1 3 2
+# Default
+#	1 1 0
+
+# Why not
+xinput set-prop "ETPS/2 Elantech Touchpad" "Synaptics Palm Detection" 1
+
+killall syndaemon # remove old daemons
+# i: How many secounds to disabe the touchpad after a keypress
+# t: do not disable scrolling when you are typing
+# K: ignore mod keys, like ctrl-c, alt-tab ...
+# d: daemon
+syndaemon -i 1.7 -d -t -K

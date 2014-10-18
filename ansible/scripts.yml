@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  sudo: no
+  user: "{{ ansible_env.USER }}"
+  tasks:
+    - name: Make sure we have ~/bin
+      file: path=~/bin state=directory
+    - name: Install Synaptic script on ringil
+      copy: src=../scripts/synaptics dest=~/bin/synaptics mode=755
+      when: ansible_hostname == "ringil"
+    - name: Add the script to autostart (on login)
+      copy: src=../autostart/synaptics.desktop dest=~/.config/autostart/synaptics.desktop
+      when: ansible_hostname == "ringil"

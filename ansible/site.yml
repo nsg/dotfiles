@@ -2,3 +2,4 @@
 
 - include: dotfiles.yml
 - include: packages.yml
+- include: scripts.yml
