@@ -1,4 +1,4 @@
 ---
 
 - include: dotfiles.yml
-#- include: packages.yml TODO: update packages
+- include: packages.yml

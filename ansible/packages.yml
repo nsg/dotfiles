@@ -17,8 +17,6 @@
         sha256sum: "813f856a3d326d2a65f561edac8050d981f93ea51da03b0fb6b3d72010a5fc96"
       }
   tasks:
-  - name: Update the systems packages
-    apt: upgrade=dist update_cache=yes
   - name: Install software from repo
     apt: pkg={{ item }} state=present
     with_items:
@@ -26,17 +24,16 @@
     - mercurial
     - git
     - terminator
-    - synapse
     - chromium-browser
-    - virtualbox-nonfree
+    - virtualbox
     - curl
     - sshpass
-  - name: Download debs
-    get_url: url={{ item.url }} dest=/tmp/{{ item.name }} sha256sum="{{ item.sha256sum }}"
-    with_items: debs
-  - name: Download packages
-    get_url: url={{ item.url }} dest=/tmp/{{ item.name }} sha256sum="{{ item.sha256sum }}"
-    with_items: packages
-  - name: Install debs
-    command: dpkg -iE /tmp/{{ item.name }}
-    with_items: debs
+#  - name: Download debs
+#    get_url: url={{ item.url }} dest=/tmp/{{ item.name }} sha256sum="{{ item.sha256sum }}"
+#    with_items: debs
+#  - name: Download packages
+#    get_url: url={{ item.url }} dest=/tmp/{{ item.name }} sha256sum="{{ item.sha256sum }}"
+#    with_items: packages
+#  - name: Install debs
+#    command: dpkg -iE /tmp/{{ item.name }}
+#    with_items: debs
