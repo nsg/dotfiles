@@ -15,6 +15,10 @@ filetype plugin indent on
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+" NerdTree
+autocmd VimEnter * if !argc() | NERDTree | endif
+autocmd BufEnter * if !argc() | NERDTreeMirror | endif
+
 set nocompatible
 set autoindent
 set smartindent
