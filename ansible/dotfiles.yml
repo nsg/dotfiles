@@ -16,6 +16,7 @@
     - vim/tmp
     - vim/doc
     - vim/autoload
+    - vim/plugin
     - mplayer
     - .config
     - .config/terminator
