@@ -28,6 +28,7 @@
     - virtualbox
     - curl
     - sshpass
+    - pandoc
   - name: Download debs
     get_url: url={{ item.url }} dest=/tmp/{{ item.name }} sha256sum="{{ item.sha256sum }}"
     with_items: debs
