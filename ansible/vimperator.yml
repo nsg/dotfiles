@@ -3,7 +3,7 @@
   - name: Vimperator | colors
     copy: src=../vimperator/{{ item }} dest=~/.vimperator/colors/{{ item }}
     with_items:
-    - desert.vimp
+    - nsg.vimp
 
   - name: Vimperator | plugins
     copy: src=../vimperator/{{ item }} dest=~/.vimperator/plugin/{{ item }}

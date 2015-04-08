@@ -5,6 +5,7 @@ set complete=lt
 set focuscontent
 set titlestring="Firefox"
 set followhints=1
+set colorscheme desert
 
 set! browser.urlbar.trimURLs=false
 set! network.http.pipelining=true
