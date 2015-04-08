@@ -18,8 +18,11 @@
     - vim/autoload
     - vim/plugin
     - mplayer
-    - .config
-    - .config/terminator
+    - config
+    - config/terminator
+    - vimperator
+    - vimperator/colors
+    - vimperator/plugin
   - name: Deploy files
     copy: src=../{{ item }} dest=~/.{{ item }}
     with_items:
@@ -28,4 +31,6 @@
     - vimrc
     - mplayer/config
     - config/terminator/config
+    - vimperatorrc
   - include: vim_plugins.yml
+  - include: vimperator.yml

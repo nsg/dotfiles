@@ -1,0 +1,24 @@
+" Vimperator config
+" vim: ft=vimperator ts=4 sw=4 sts=0
+
+set complete=lt
+set focuscontent
+set titlestring="Firefox"
+set followhints=1
+
+set! browser.urlbar.trimURLs=false
+set! network.http.pipelining=true
+set! general.warnOnAboutConfig=false
+set! layout.spellcheckDefault=2
+
+set! extensions.lastpass.showHomepageAfterLogin=false
+set! extensions.lastpass.Icon=1
+
+mapclear
+cmapclear
+imapclear
+
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+
+echo "ZPM core online"
