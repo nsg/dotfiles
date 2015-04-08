@@ -52,5 +52,6 @@ colorscheme desert
 set ts=4 sts=4 sw=4 noexpandtab
 
 au BufRead,BufNewFile *.rb,*.rhtml,*.yml,Vagrantfile set sts=2 sw=2 expandtab
+au BufRead,BufNewFile *.py,*.py.* set sts=4 sw=4 expandtab
 au BufNewFile,BufRead *.gradle setf groovy
 au BufRead,BufNewFile *.yml set filetype=ansible
