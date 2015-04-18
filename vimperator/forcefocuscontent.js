@@ -19,7 +19,7 @@ var PLUGIN_INFO = xml`
 		setTimeout(function () {
 			let focused = document.commandDispatcher.focusedElement;
 			if (focused) focused.blur();
-		}, 1000);
+		}, 100);
 	}
 })();
 
