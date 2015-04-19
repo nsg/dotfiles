@@ -1,5 +1,5 @@
 ---
 
-- include: dotfiles.yml
 - include: packages.yml
+- include: dotfiles.yml
 - include: scripts.yml

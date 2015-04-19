@@ -1,0 +1,7 @@
+[user]
+	email = nsg@nsg.cc
+	name = Stefan Berggren
+[push]
+	default = simple
+[merge]
+	tool = meld

@@ -32,5 +32,6 @@
     - mplayer/config
     - config/terminator/config
     - vimperatorrc
+    - gitconfig
   - include: vim_plugins.yml
   - include: vimperator.yml
