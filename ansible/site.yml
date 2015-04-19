@@ -3,3 +3,4 @@
 - include: packages.yml
 - include: dotfiles.yml
 - include: scripts.yml
+- include: spotify.yml
