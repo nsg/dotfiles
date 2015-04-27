@@ -25,6 +25,9 @@
     - path: https://github.com/kien/ctrlp.vim.git
       name: ctrlp
       version: c1646e3c28d75bcc834af4836f4c6e12296ba891 # 1.79
+    - path: https://github.com/ekalinin/Dockerfile.vim.git
+      name: Dockerfile.vim
+      version: 1fc71e1c82e1b818d3353c8f1c28afece5e20046
       
 - name: Download plugins from vim.org to plugin
   get_url:
