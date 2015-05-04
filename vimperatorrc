@@ -11,6 +11,7 @@ set! browser.urlbar.trimURLs=false
 set! network.http.pipelining=true
 set! general.warnOnAboutConfig=false
 set! layout.spellcheckDefault=2
+set! browser.fixup.alternate.enabled=false
 
 set! extensions.lastpass.showHomepageAfterLogin=false
 set! extensions.lastpass.Icon=1
