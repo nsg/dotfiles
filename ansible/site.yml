@@ -4,3 +4,4 @@
 - include: dotfiles.yml
 - include: scripts.yml
 - include: spotify.yml
+- include: docker.yml
