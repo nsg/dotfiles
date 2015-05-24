@@ -18,7 +18,7 @@
   with_items:
     - path: https://github.com/chase/vim-ansible-yaml.git
       name: vim-ansible-yaml
-      version: 85bec55a1390e59c4fec3e79f961a95f77b30337
+      version: 7067ab058866ec150cc27eaf954cbe04180d3256
     - path: https://github.com/scrooloose/nerdtree.git
       name: nerdtree
       version: 205367ab3f46dcc88b6ebb819a276e793a21e995 # 4.2.0

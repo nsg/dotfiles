@@ -40,6 +40,9 @@ let g:gitgutter_sign_removed = '⚫'
 let g:gitgutter_sign_removed_first_line = '☗'
 let g:gitgutter_sign_modified_removed = '☖'
 
+" vim-ansible-yaml
+let g:ansible_options = {'ignore_blank_lines': 1}
+
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
 set autoindent						" Automatic ident
