@@ -16,4 +16,4 @@ fi
 
 message "Run ansible playbook"
 export ANSIBLE_NOCOWS=1 # kill the cow!
-ansible-playbook -c local -s -K -i 127.0.0.1, ansible/site.yml
+ansible-playbook -c local -s -K -i 127.0.0.1, --diff ansible/site.yml

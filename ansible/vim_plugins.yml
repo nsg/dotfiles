@@ -9,7 +9,7 @@
 - name: Install pathogen.vim
   command: mv ~/.vim/git/pathogen.vim/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim creates="~/.vim/autoload/pathogen.vim"
 
-- name: Clone plugins for Vundle to manage
+- name: Clone plugins for Pathogen to manage
   git:
     repo: "{{ item.path }}"
     dest: "~/.vim/bundle/{{ item.name }}"
@@ -28,7 +28,16 @@
     - path: https://github.com/ekalinin/Dockerfile.vim.git
       name: Dockerfile.vim
       version: 1fc71e1c82e1b818d3353c8f1c28afece5e20046
-      
+    - path: https://github.com/tpope/vim-commentary.git
+      name: vim-commentary
+      version: v1.2
+    - path: https://github.com/airblade/vim-gitgutter.git
+      name: vim-gitgutter
+      version: 339f8ba079ed7d465ca442c9032b36bc56c21f61
+    - path: https://github.com/bling/vim-airline.git
+      name: vim-airline
+      version: v0.7
+
 - name: Download plugins from vim.org to plugin
   get_url:
     url: "{{ item.url }} "
