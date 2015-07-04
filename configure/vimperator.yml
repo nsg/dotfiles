@@ -1,0 +1,11 @@
+---
+
+  - name: Vimperator | colors
+    copy: src=configure/files/vimperator/{{ item }} dest=~/.vimperator/colors/{{ item }}
+    with_items:
+    - nsg.vimp
+
+  - name: Vimperator | plugins
+    copy: src=configure/files/vimperator/{{ item }} dest=~/.vimperator/plugin/{{ item }}
+    with_items:
+    - forcefocuscontent.js

@@ -1,0 +1,30 @@
+---
+
+- name: Make directories
+  file: path=~/.{{ item }} state=directory
+  with_items:
+    - vim
+    - vim/backup
+    - vim/tmp
+    - vim/doc
+    - vim/autoload
+    - vim/plugin
+    - mplayer
+    - config
+    - config/terminator
+    - vimperator
+    - vimperator/colors
+    - vimperator/plugin
+
+- name: "Deploy files (copy)"
+  copy:
+    src: "configure/files/{{ item }}"
+    dest: "~/.{{ item }}"
+  with_items:
+    - bashrc
+    - inputrc
+    - vimrc
+    - mplayer/config
+    - config/terminator/config
+    - vimperatorrc
+    - gitconfig

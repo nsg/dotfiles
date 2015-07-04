@@ -1,0 +1,48 @@
+---
+
+- name: Install packages
+  hosts: all
+  tasks:
+
+    - include: install/docker.yml
+    - include: install/openafs.yml
+      when: ansible_distribution_release == "freya"
+    - include: install/spotify.yml
+
+    - name: Install misc software
+      apt: name={{ item }} state=present
+      with_items:
+      - vim
+      - mercurial
+      - git
+      - terminator
+      - chromium-browser
+      - virtualbox
+      - curl
+      - sshpass
+      - pandoc
+      - meld
+      - firefox
+
+    - include: install/deb-install.yml
+      vars:
+        deb:
+          name: vagrant_1.6.5_x86_64.deb
+          url: "https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb"
+          sha256sum: e2c7af6d032ac551ebd6399265cb9cb64402c9fb96a12289161b7f67afada28a
+
+- name: "Configure dotfiles (with your user)"
+  hosts: all
+  sudo: no
+  user: "{{ ansible_env.USER }}"
+  tasks:
+    - include: configure/dotfiles.yml
+    - include: configure/vim_plugins.yml
+    - include: configure/vimperator.yml
+
+- name: "Install scripts (with your user)"
+  hosts: all
+  sudo: no
+  user: "{{ ansible_env.USER }}"
+  tasks:
+    - include: scripts/scripts.yml

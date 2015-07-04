@@ -1,0 +1,25 @@
+---
+
+- name: Setup Docker repo key
+  apt_key:
+    keyserver: "hkp://keyserver.ubuntu.com:80"
+    id: "36A1D7869245C8950F966E92D8576A8BA88D21E9"
+
+- name: Setup Docker repo path
+  apt_repository:
+    repo: 'deb https://get.docker.com/ubuntu docker main'
+    state: present
+
+- name: Install docker
+  apt:
+    name: lxc-docker
+
+- name: Download docker-gc
+  get_url:
+    url: "https://raw.githubusercontent.com/spotify/docker-gc/1b5d533172fa3707dcd4e5a4a3b7cd25d6e6e237/docker-gc"
+    dest: /etc/cron.hourly/docker-gc
+    sha256sum: "a406b7bb75b372e698c944cf53d069391c3d2a115f0e6fd7146d48fa364eea76"
+    mode: 0755
+
+- name: Add {{ ansible_env.SUDO_USER }} to docker group
+  user: name={{ ansible_env.SUDO_USER }} groups=docker append=yes

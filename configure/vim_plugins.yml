@@ -54,7 +54,10 @@
     - vim-syntax-go
 
 - name: Enable plugins managed with vim-addon-manager
-  shell: vim-addon-manager -w install {{ item }}
+  shell: vim-addon-manager -w install {{ item.name }}
+  args:
+    creates: "{{ item.creates }}"
   sudo: yes
   with_items:
-    - go-syntax
+    - name: go-syntax
+      creates: /usr/share/vim/addons/syntax/go.vim
