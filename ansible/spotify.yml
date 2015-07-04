@@ -5,7 +5,7 @@
     - name: Add Spotify key
       apt_key:
         keyserver: keyserver.ubuntu.com
-        id: E22CBE98B5575C1857671254082CCEDF94558F59
+        id: BBEBDCB318AD50EC6865090613B00F1FD2C19886
       when: ansible_hostname != "dagmor"
     - name: Add spotify repo
       apt_repository:
