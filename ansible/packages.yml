@@ -17,6 +17,18 @@
         sha256sum: "813f856a3d326d2a65f561edac8050d981f93ea51da03b0fb6b3d72010a5fc96"
       }
   tasks:
+
+  # OpenAFS client is broken on my Elementary based systems.
+  - name: Setup OpenAFS PPA
+    apt_repository:
+      repo: "deb http://ppa.launchpad.net/openafs/stable/ubuntu trusty main"
+    when: ansible_distribution_release == "freya"
+  - name: Add OpenAFS PPA key
+    apt_key:
+      keyserver: keyserver.ubuntu.com
+      id: 64E5F00A03B455C84D806026DD48DDF05169C82A
+    when: ansible_distribution_release == "freya"
+
   - name: Install software from repo
     apt: pkg={{ item }} state=present
     with_items:
