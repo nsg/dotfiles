@@ -23,6 +23,7 @@
       - pandoc
       - meld
       - firefox
+      - ctags
 
     - include: install/deb-install.yml
       vars:

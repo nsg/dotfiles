@@ -37,6 +37,9 @@
     - path: https://github.com/bling/vim-airline.git
       name: vim-airline
       version: v0.7
+    - path: https://github.com/majutsushi/tagbar.git
+      name: tagbar
+      version: v2.6.1
 
 - name: Download plugins from vim.org to plugin
   get_url:

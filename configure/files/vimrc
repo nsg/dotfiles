@@ -43,6 +43,9 @@ let g:gitgutter_sign_modified_removed = '☖'
 " vim-ansible-yaml
 let g:ansible_options = {'ignore_blank_lines': 1}
 
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
 set autoindent						" Automatic ident
