@@ -79,6 +79,12 @@ inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
 inoremap fd <esc>					" Type fd to enter normal mode
 
+" Easier movements between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " Map spacebar to leader
 nnoremap <SPACE> <Nop>				" Disable spacebar
 let mapleader = " "					" Set spacebar to leader
