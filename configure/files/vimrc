@@ -46,6 +46,11 @@ let g:ansible_options = {'ignore_blank_lines': 1}
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
 set autoindent						" Automatic ident

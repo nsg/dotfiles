@@ -40,6 +40,9 @@
     - path: https://github.com/majutsushi/tagbar.git
       name: tagbar
       version: v2.6.1
+    - path: https://github.com/SirVer/ultisnips.git
+      name: ultisnips
+      version: 3.0
 
 - name: Download plugins from vim.org to plugin
   get_url:
