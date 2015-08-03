@@ -24,6 +24,7 @@
       - meld
       - firefox
       - ctags
+      - silversearcher-ag
 
     - include: install/deb-install.yml
       vars:

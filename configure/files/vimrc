@@ -20,6 +20,9 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd BufEnter * if !argc() | NERDTreeMirror | endif
 nmap <F5> :NERDTreeToggle<CR>
 
+" Ag.vim
+nmap <F7> :NERDTreeClose<CR>:Ag 
+
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
