@@ -18,6 +18,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " NerdTree
 autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd BufEnter * if !argc() | NERDTreeMirror | endif
+nmap <F5> :NERDTreeToggle<CR>
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
