@@ -8,5 +8,5 @@
   when: ansible_hostname == "ringil"
 
 - name: "Add the Synaptic script to autostart (on login)"
-  copy: src=../autostart/synaptics.desktop dest=~/.config/autostart/synaptics.desktop
+  copy: src=scripts/files/autostart/synaptics.desktop dest=~/.config/autostart/synaptics.desktop
   when: ansible_hostname == "ringil"
