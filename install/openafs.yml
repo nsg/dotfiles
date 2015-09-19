@@ -8,3 +8,16 @@
   apt_key:
     keyserver: keyserver.ubuntu.com
     id: 64E5F00A03B455C84D806026DD48DDF05169C82A
+
+- name: Hostfix for broken OpenAFS package | setup dir
+  file:
+    path: "/lib/modules/{{ ansible_kernel }}/fs"
+    state: directory
+  when: ansible_distribution_release == "freya"
+
+- name: Hostfix for broken OpenAFS package | make symlink
+  file:
+    src: /lib/modules/{{ ansible_kernel }}/extra/openafs.ko
+    dest: /lib/modules/{{ ansible_kernel }}/fs/openafs.ko
+    state: link
+  when: ansible_distribution_release == "freya"
