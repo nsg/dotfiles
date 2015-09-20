@@ -16,8 +16,8 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " NerdTree
-autocmd VimEnter * if !argc() | NERDTree | endif
-autocmd BufEnter * if !argc() | NERDTreeMirror | endif
+"autocmd VimEnter * if !argc() | NERDTree | endif
+"autocmd BufEnter * if !argc() | NERDTreeMirror | endif
 nmap <F5> :NERDTreeToggle<CR>
 
 " Ag.vim
@@ -49,6 +49,8 @@ let g:ansible_options = {'ignore_blank_lines': 1}
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
