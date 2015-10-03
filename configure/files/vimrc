@@ -83,7 +83,6 @@ set t_Co=256
 " misc maps
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
-inoremap fd <esc>					" Type fd to enter normal mode
 
 " Easier movements between splits
 nnoremap <C-J> <C-W><C-J>
