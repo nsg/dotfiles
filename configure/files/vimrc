@@ -19,6 +19,7 @@ let g:ctrlp_cmd = 'CtrlP'
 "autocmd VimEnter * if !argc() | NERDTree | endif
 "autocmd BufEnter * if !argc() | NERDTreeMirror | endif
 nmap <F5> :NERDTreeToggle<CR>
+nmap <F6> :NERDTreeFind<CR>
 
 " Ag.vim
 nmap <F7> :NERDTreeClose<CR>:Ag 
