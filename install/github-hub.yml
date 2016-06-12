@@ -23,6 +23,7 @@
       to: /usr/share/man/man1/hub.1
     - from: etc/hub.bash_completion.sh
       to: /etc/bash_completion.d/hub.bash_completion.sh
+  when: downloaded_hub|changed
 
 - name: Set execute permission
   file: path=/usr/local/bin/hub mode=0755
