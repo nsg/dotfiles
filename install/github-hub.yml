@@ -3,8 +3,26 @@
 - name: Download hub command
   get_url:
     url: "https://github.com/github/hub/releases/download/v2.2.3/hub-linux-amd64-2.2.3.tgz"
-    dest: /usr/local/bin/hub
+    dest: /tmp/hub.tgz
     sha256sum: 54c35a459a4241b7ae4c28bcfea0ceef849dd2f8a9dd2b82ba2ba964a743e6bc
+  register: downloaded_hub
+
+- name: Unarchive hub command
+  unarchive:
+    copy: no
+    src: /tmp/hub.tgz
+    dest: /tmp
+  when: downloaded_hub|changed
+
+- name: Move files in place
+  command: "mv /tmp/hub-linux-amd64-2.2.3/{{ item.from }} {{ item.to }}"
+  with_items:
+    - from: bin/hub
+      to: /usr/local/bin/hub
+    - from: share/man/man1/hub.1
+      to: /usr/share/man/man1/hub.1
+    - from: etc/hub.bash_completion.sh
+      to: /etc/bash_completion.d/hub.bash_completion.sh
 
 - name: Set execute permission
   file: path=/usr/local/bin/hub mode=0755
