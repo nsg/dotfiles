@@ -1,0 +1,10 @@
+---
+
+- name: Download hub command
+  get_url:
+    url: "https://github.com/github/hub/releases/download/v2.2.3/hub-linux-amd64-2.2.3.tgz"
+    dest: /usr/local/bin/hub
+    sha256sum: 54c35a459a4241b7ae4c28bcfea0ceef849dd2f8a9dd2b82ba2ba964a743e6bc
+
+- name: Set execute permission
+  file: path=/usr/local/bin/hub mode=0755
