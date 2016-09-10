@@ -26,6 +26,7 @@
       - firefox
       - ctags
       - silversearcher-ag
+      - tig
 
     - include: install/deb-install.yml
       vars:
