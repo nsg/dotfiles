@@ -55,18 +55,3 @@
     - url: "http://www.vim.org/scripts/download_script.php?src_id=13110"
       name: "rcs.vim"
       sha256sum: 76a67192026626cd3bc5903a441019ad5eb5eea1fada85ba6726a81ddcf87231
-
-- name: Install packages from apt
-  apt: name={{ item }}
-  sudo: yes
-  with_items:
-    - vim-syntax-go
-
-- name: Enable plugins managed with vim-addon-manager
-  shell: vim-addon-manager -w install {{ item.name }}
-  args:
-    creates: "{{ item.creates }}"
-  sudo: yes
-  with_items:
-    - name: go-syntax
-      creates: /usr/share/vim/addons/syntax/go.vim
