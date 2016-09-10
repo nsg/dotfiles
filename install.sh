@@ -6,7 +6,7 @@ message() {
 
 if ! type pip; then
 	message "Install python-pip and dev"
-	sudo apt-get install python-pip python-dev
+	sudo apt-get install python-pip python-dev libssl-dev
 fi
 
 if ! type ansible; then
