@@ -1,7 +1,7 @@
 " Vimperator config
 " vim: ft=vimperator ts=4 sw=4 sts=0
 
-set complete=lthb
+set complete=tlb
 set focuscontent
 set titlestring="Firefox"
 set followhints=1
