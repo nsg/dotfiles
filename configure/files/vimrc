@@ -55,8 +55,19 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" Hack, the spellcheck for Ansible is broken so this is a fast
+" way to toggle to yaml-mode to check my spelling.
+function! SpellCheckHack()
+	if &filetype == "ansible"
+		set filetype=yaml
+	else
+		set filetype=ansible
+	endif
+endfunction
+
 " Spellchecking
 set spelllang=en_us
+nmap <F2> :call SpellCheckHack()<CR>
 
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
@@ -115,3 +126,4 @@ au BufNewFile,BufRead *.gradle setf groovy
 au BufRead,BufNewFile *.yml set filetype=ansible spell
 au BufRead,BufNewFile *.md set filetype=markdown spell
 au BufRead,BufNewFile COMMIT_EDITMSG set spell
+au FileType vim set spell
