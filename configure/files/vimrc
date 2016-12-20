@@ -55,6 +55,9 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" Spellchecking
+set spell spelllang=en_us
+
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
 set autoindent						" Automatic ident
@@ -95,6 +98,13 @@ let mapleader = " "					" Set spacebar to leader
 " syntax
 syntax on
 colorscheme desert
+hi clear SpellBad
+hi clear SpellCap
+hi clear SpellRare
+hi clear SpellLocal
+hi SpellBad cterm=underline ctermfg=red
+hi SpellRare cterm=underline ctermfg=magenta
+hi SpellLocal cterm=underline ctermfg=cyan
 
 " default formatting rules
 set ts=4 sts=4 sw=4 noexpandtab
