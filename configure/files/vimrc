@@ -45,9 +45,6 @@ let g:gitgutter_sign_removed = '-'
 let g:gitgutter_sign_removed_first_line = '☗'
 let g:gitgutter_sign_modified_removed = '☖'
 
-" vim-ansible-yaml
-let g:ansible_options = {'ignore_blank_lines': 1}
-
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1

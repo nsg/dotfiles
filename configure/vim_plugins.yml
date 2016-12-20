@@ -16,9 +16,9 @@
     version: "{{ item.version }}"
     force: yes
   with_items:
-    - path: https://github.com/chase/vim-ansible-yaml.git
-      name: vim-ansible-yaml
-      version: 7067ab058866ec150cc27eaf954cbe04180d3256
+    - path: https://github.com/pearofducks/ansible-vim.git
+      name: ansible-vim
+      version: 8540ad7ff0f8da2b31b5c55e6ae52ad87221e918
     - path: https://github.com/scrooloose/nerdtree.git
       name: nerdtree
       version: 205367ab3f46dcc88b6ebb819a276e793a21e995 # 4.2.0
@@ -46,6 +46,13 @@
     - path: https://github.com/rking/ag.vim.git
       name: ag.vim
       version: f755abfb1c4e4e3f59f6cfa25ce16edb5af9e516
+
+- name: Remove plugins for Pathogen to manage
+  file:
+    path: "~/.vim/bundle/{{ item.name }}"
+    state: absent
+  with_items:
+    - name: vim-ansible-yaml
 
 - name: Download plugins from vim.org to plugin
   get_url:
