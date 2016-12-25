@@ -370,3 +370,10 @@ a() {
 
     popd > /dev/null
 }
+
+c() {
+    local scope=$1
+    local project=$2
+
+    cd ~/code/*${scope}*/*${project}*
+}
