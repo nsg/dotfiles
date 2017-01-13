@@ -29,6 +29,12 @@
       - silversearcher-ag
       - tig
 
+    - name: Install with pip
+      pip:
+        name: "{{ item }}"
+      with_items:
+        - flake8
+
     - include: install/deb-install.yml
       vars:
         deb:
