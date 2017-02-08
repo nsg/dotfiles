@@ -333,6 +333,31 @@ function set_prompt() {
 # Misc
 ##
 
+color_log() {
+    local state=$1; shift
+    local message="$@"
+
+    case $state in
+        info)
+            echo -ne "\e[1m[INFO] "
+            ;;
+        warn)
+            echo -ne "\e[33m[WARN] "
+            ;;
+        crit)
+            echo -ne "\e[191m[CRIT] "
+            ;;
+    esac
+    echo -ne "\e[21m"
+    echo $message
+}
+
+__a_compl() {
+    local git_root="$(git rev-parse --show-toplevel)"
+    ls -1 $git_root/playbooks/ | tr '\n' ' '
+}
+complete -W "$(__a_compl)" a
+
 a() {
     local playbook="$1"; shift
     local git_root="$(git rev-parse --show-toplevel)"
@@ -340,19 +365,19 @@ a() {
 
     if [ ! -e "$playbook" ]; then
         playbook=$(echo ${git_root}/playbooks/*${playbook}*/site.yml)
-        echo "Expanded playbook to $playbook"
+        color_log info "Expanded playbook to $playbook"
     else
         playbook="${PWD}/$playbook"
     fi
     pushd $git_root > /dev/null
 
     if [ ! -f "$playbook" ]; then
-        echo "Failed: $playbook not found"
+        color_log crit "Failed: $playbook not found"
     else
 
         ansible_version=$(awk '/ansible:/{print $NF}' $playbook)
         if [ -z "$ansible_version" ]; then
-            echo "No ansible version found, use system default"
+            color_log warn "No ansible version found, use system default"
         else
             if [ ! -e "${git_root}/.envs/$ansible_version" ]; then
                 virtualenv "${git_root}/.envs/$ansible_version"
@@ -363,8 +388,19 @@ a() {
             fi
         fi
 
+        if [ -e requirements.txt ]; then
+            color_log info "Install the repos requirements.txt"
+            pip install -r requirements.txt
+        fi
+
+        playbook_path="$(dirname /home/nsg/code/svt/ansible-infra-playbooks/playbooks/base/site.yml)"
+        if [ -e $playbook_path/requirements.txt ]; then
+            color_log info "Install the playbooks requirements.txt"
+            pip install -r $playbook_path/requirements.txt
+        fi
+
         ansible_cmd="ansible-playbook -i ${inventory_path} -u $ANSIBLE_A_USER -s $playbook $@"
-        echo $ansible_cmd
+        color_log info $ansible_cmd
         $ansible_cmd
     fi
 
