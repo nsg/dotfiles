@@ -399,6 +399,17 @@ a() {
             pip install -r $playbook_path/requirements.txt
         fi
 
+        if [ -e $playbook_path/requirements.yml ]; then
+            if [ -e $git_root/ansible-galaxy-version ]; then
+                galaxy_binary="$git_root/ansible-galaxy-version"
+            else
+                galaxy_binary=ansible-galaxy
+            fi
+
+            color_log info "Install Ansible deps with $galaxy_binary"
+            $galaxy_binary install -p $playbook_path/roles -r $playbook_path/requirements.yml
+        fi
+
         ansible_cmd="ansible-playbook -i ${inventory_path} -u $ANSIBLE_A_USER -s $playbook $@"
         color_log info $ansible_cmd
         $ansible_cmd
