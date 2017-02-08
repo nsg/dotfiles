@@ -393,7 +393,7 @@ a() {
             pip install -r requirements.txt
         fi
 
-        playbook_path="$(dirname /home/nsg/code/svt/ansible-infra-playbooks/playbooks/base/site.yml)"
+        playbook_path="$(dirname $playbook)"
         if [ -e $playbook_path/requirements.txt ]; then
             color_log info "Install the playbooks requirements.txt"
             pip install -r $playbook_path/requirements.txt
