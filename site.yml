@@ -14,7 +14,7 @@
   become: yes
   tasks:
     - include: install/github-hub.yml
-    #- include: install/spotify.yml
+    - include: install/spotify.yml
       
     - name: Install misc software
       apt: name={{ item }} state=present
