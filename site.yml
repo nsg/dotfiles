@@ -13,7 +13,7 @@
   hosts: all
   become: yes
   tasks:
-    #- include: install/github-hub.yml
+    - include: install/github-hub.yml
     #- include: install/spotify.yml
       
     - name: Install misc software

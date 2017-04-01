@@ -1,29 +1,62 @@
 ---
 
-- name: Download hub command
-  get_url:
-    url: "https://github.com/github/hub/releases/download/v2.2.3/hub-linux-amd64-2.2.3.tgz"
-    dest: /tmp/hub.tgz
-    sha256sum: 54c35a459a4241b7ae4c28bcfea0ceef849dd2f8a9dd2b82ba2ba964a743e6bc
-  register: downloaded_hub
+- name: Set facts
+  set_fact:
+    version: "2.2.9"
+    hash: "5867647071007add582f911867fb4973354c51690ac20aecb2e73be7440875a3"
 
-- name: Unarchive hub command
-  unarchive:
-    copy: no
-    src: /tmp/hub.tgz
-    dest: /tmp
-  when: downloaded_hub|changed
-
-- name: Move files in place
-  command: "mv /tmp/hub-linux-amd64-2.2.3/{{ item.from }} {{ item.to }}"
+- name: Prep the system for local facts
+  file:
+    path: "{{ item }}"
+    state: directory
   with_items:
-    - from: bin/hub
-      to: /usr/local/bin/hub
-    - from: share/man/man1/hub.1
-      to: /usr/share/man/man1/hub.1
-    - from: etc/hub.bash_completion.sh
-      to: /etc/bash_completion.d/hub.bash_completion.sh
-  when: downloaded_hub|changed
+    - /etc/ansible
+    - /etc/ansible/facts.d
 
-- name: Set execute permission
-  file: path=/usr/local/bin/hub mode=0755
+- block:
+  - name: Download hub command
+    get_url:
+      url: "https://github.com/github/hub/releases/download/v{{ version }}/hub-linux-amd64-{{ version }}.tgz"
+      dest: /tmp/hub.tgz
+      sha256sum: "{{ hash }}"
+    register: downloaded_hub
+
+  - name: Unarchive hub command
+    unarchive:
+      copy: no
+      src: /tmp/hub.tgz
+      dest: /tmp
+    when: downloaded_hub|changed
+
+  - name: Move files in place
+    command: "mv /tmp/hub-linux-amd64-{{ version }}/{{ item.from }} {{ item.to }}"
+    with_items:
+      - from: bin/hub
+        to: /usr/local/bin/hub
+      - from: share/man/man1/hub.1
+        to: /usr/share/man/man1/hub.1
+      - from: etc/hub.bash_completion.sh
+        to: /etc/bash_completion.d/hub.bash_completion.sh
+    when: downloaded_hub|changed
+
+  - name: Set execute permission
+    file: path=/usr/local/bin/hub mode=0755
+
+  - name: Record the installed version in the local facts
+    copy:
+      dest: "/etc/ansible/facts.d/github_hub.fact"
+      content: "[installed]\nversion={{ version }}\n"
+
+  always:
+    - name: Remove temporary files
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "/tmp/hub.tgz"
+        - "/tmp/hub-linux-amd64-{{ version }}"
+
+  when: >
+    ansible_local is not defined or
+    ansible_local.github_hub is not defined or
+    ansible_local.github_hub.installed.version != version
