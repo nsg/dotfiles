@@ -37,12 +37,17 @@
   become: yes
   tasks:
 
+    - name: Add webupd8team terminix PPA
+      apt_repository:
+        repo: 'ppa:webupd8team/terminix'
+
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
       - mercurial
       - git
       - virtualbox
+      - terminix
 
     - include: install/deb-install.yml
       vars:
