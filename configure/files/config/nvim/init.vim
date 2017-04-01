@@ -14,6 +14,7 @@ Plug 'bling/vim-airline', { 'tag': 'v0.7' }
 Plug 'majutsushi/tagbar', { 'tag': 'v2.6.1' }
 Plug 'SirVer/ultisnips', { 'tag': '3.0' }
 Plug 'rking/ag.vim', { 'commit': 'f755abfb1c4e4e3f59f6cfa25ce16edb5af9e516' }
+Plug 'neomake/neomake', { 'commit': 'bd6e99c9470f5ef2fdcff5094e11998464129053' }
 call plug#end()
 
 ""
@@ -64,15 +65,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+" Neomake
+autocmd! BufWritePost * Neomake
 
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
