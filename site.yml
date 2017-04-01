@@ -51,13 +51,13 @@
           url: "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
           sha256sum: 30ee435c3358c6a835ea52cf710f4e50caa0e77cb721332132a2d3386a8745d9
 
-  #- name: "Configure dotfiles (with your user)"
-  #  hosts: all
-  #  sudo: no
-  #  user: "{{ ansible_env.USER }}"
-  #  tasks:
-  #    - include: configure/dotfiles.yml
-  #      #- include: configure/vim_plugins.yml
+- name: "Configure dotfiles (with your user)"
+  hosts: all
+  sudo: no
+  user: "{{ ansible_env.USER }}"
+  tasks:
+    - include: configure/vim_plugins.yml
+    - include: configure/dotfiles.yml
   #      #- include: configure/vimperator.yml
   #
   #- name: "Install scripts (with your user)"
