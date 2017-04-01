@@ -5,7 +5,6 @@
   with_items:
     - mplayer
     - config
-    - config/terminator
     - config/nvim
 
 - name: "Deploy files (copy)"
@@ -17,5 +16,4 @@
     - inputrc
     - config/nvim/init.vim
     - mplayer/config
-    - config/terminator/config
     - gitconfig
