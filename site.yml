@@ -15,7 +15,7 @@
   tasks:
     - include: install/github-hub.yml
     - include: install/spotify.yml
-      
+
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
@@ -36,7 +36,7 @@
   hosts: dummy
   become: yes
   tasks:
-      
+
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
