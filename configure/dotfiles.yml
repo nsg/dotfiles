@@ -6,6 +6,7 @@
     - mplayer
     - config
     - config/nvim
+    - config/yamllint
 
 - name: "Deploy files (copy)"
   copy:
@@ -15,6 +16,7 @@
     - bashrc
     - inputrc
     - config/nvim/init.vim
+    - config/yamllint/config
     - mplayer/config
     - gitconfig
     - gitignore
