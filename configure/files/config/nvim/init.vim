@@ -76,17 +76,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
-set autoindent						" Automatic ident
 set smartindent						" Smart idents
 set showmatch						" Show matching brackets
-set incsearch						" Search while we type
 set background=dark					" We like dark backgrounds
 set number							" Show line numbers
 set shiftround						" Round indent to multiple of 'shiftwidth'
 set foldenable						" Enable folds
 set showcmd							" Show partial commands in status line and
 									" Selected characters/lines in visual mode
-set smarttab						" Smarter tab idents
 set backup							" Enable vim backups
 set nojoinspaces					" Prevents inserting two spaces after a J
 set list							" Show hidden chars
@@ -111,7 +108,6 @@ nnoremap <SPACE> <Nop>				" Disable spacebar
 let mapleader = " "					" Set spacebar to leader
 
 " syntax
-syntax on
 colorscheme desert
 hi clear SpellBad
 hi clear SpellCap
