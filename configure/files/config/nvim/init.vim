@@ -67,6 +67,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Neomake
 autocmd! BufWritePost * Neomake
+let g:neomake_ansible_enabled_makers = ['yamllint']
+let g:neomake_ansible_yamllint_maker = neomake#makers#ft#yaml#yamllint()
 
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
