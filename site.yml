@@ -19,18 +19,19 @@
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
-      - neovim
-      - chromium-browser
-      - curl
-      - sshpass
-      - pandoc
-      - meld
-      - firefox
-      - ctags
-      - silversearcher-ag
-      - tig
-      - docker.io
-      - python-flake8
+        - neovim
+        - chromium-browser
+        - curl
+        - sshpass
+        - pandoc
+        - meld
+        - firefox
+        - ctags
+        - silversearcher-ag
+        - tig
+        - docker.io
+        - python-flake8
+        - yamllint
 
 - name: Install packages on dummy systems
   hosts: dummy
@@ -44,10 +45,10 @@
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
-      - mercurial
-      - git
-      - virtualbox
-      - terminix
+        - mercurial
+        - git
+        - virtualbox
+        - terminix
 
     - include: install/deb-install.yml
       vars:
