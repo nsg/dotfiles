@@ -17,3 +17,4 @@
     - config/nvim/init.vim
     - mplayer/config
     - gitconfig
+    - gitignore
