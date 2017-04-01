@@ -1,24 +1,26 @@
 ---
 
-- name: Install packages
+- name: Update inventory
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Place our host in a group with our hostname
+      add_host:
+        group: "{{ ansible_hostname }}"
+        name: "127.0.0.1"
+
+- name: Install packages on all systems
   hosts: all
   become: yes
   tasks:
-
-    - include: install/openafs.yml
-      when: ansible_distribution_release == "freya" and ansible_hostname != 'dagmor'
-    - include: install/github-hub.yml
-      #- include: install/spotify.yml
-
+    #- include: install/github-hub.yml
+    #- include: install/spotify.yml
+      
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
       - neovim
-      - mercurial
-      - git
-      - terminator
       - chromium-browser
-      - virtualbox
       - curl
       - sshpass
       - pandoc
@@ -28,12 +30,19 @@
       - silversearcher-ag
       - tig
       - docker.io
+      - python-flake8
 
-    - name: Install with pip
-      pip:
-        name: "{{ item }}"
+- name: Install packages on dummy systems
+  hosts: dummy
+  become: yes
+  tasks:
+      
+    - name: Install misc software
+      apt: name={{ item }} state=present
       with_items:
-        - flake8
+      - mercurial
+      - git
+      - virtualbox
 
     - include: install/deb-install.yml
       vars:
@@ -42,18 +51,18 @@
           url: "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
           sha256sum: 30ee435c3358c6a835ea52cf710f4e50caa0e77cb721332132a2d3386a8745d9
 
-- name: "Configure dotfiles (with your user)"
-  hosts: all
-  sudo: no
-  user: "{{ ansible_env.USER }}"
-  tasks:
-    - include: configure/dotfiles.yml
-      #- include: configure/vim_plugins.yml
-      #- include: configure/vimperator.yml
-
-- name: "Install scripts (with your user)"
-  hosts: all
-  sudo: no
-  user: "{{ ansible_env.USER }}"
-  tasks:
-    - include: scripts/scripts.yml
+  #- name: "Configure dotfiles (with your user)"
+  #  hosts: all
+  #  sudo: no
+  #  user: "{{ ansible_env.USER }}"
+  #  tasks:
+  #    - include: configure/dotfiles.yml
+  #      #- include: configure/vim_plugins.yml
+  #      #- include: configure/vimperator.yml
+  #
+  #- name: "Install scripts (with your user)"
+  #  hosts: all
+  #  sudo: no
+  #  user: "{{ ansible_env.USER }}"
+  #  tasks:
+  #    - include: scripts/scripts.yml
