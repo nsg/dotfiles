@@ -60,4 +60,4 @@ if [ ! -e "$SCRIPTPATH/.env/bin/ansible" ]; then
 fi
 
 export ANSIBLE_NOCOWS=1 # kill the cow!
-ansible-playbook -c local -s -K -i 127.0.0.1, --diff site.yml
+ansible-playbook -c local -b -K -i 127.0.0.1, --diff site.yml

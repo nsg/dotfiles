@@ -53,7 +53,7 @@
 
 - name: "Configure all systems (with your user)"
   hosts: all
-  sudo: no
+  become: no
   user: "{{ ansible_env.USER }}"
   tasks:
     - include: configure/vim_plugins.yml
