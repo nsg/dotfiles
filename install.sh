@@ -4,6 +4,11 @@ message() {
 	echo "$1"
 }
 
+die() {
+	message "$1"
+	exit 1
+}
+
 get_my_path() {
 	pushd $(dirname $0) > /dev/null
 	pwd -P
@@ -16,7 +21,20 @@ install_package() {
 	fi
 }
 
+release() {
+	lsb_release -sr
+}
+
 SCRIPTPATH="$(get_my_path)"
+
+# Make sure that this is a supported OS
+if [ ! -e /etc/debian_version ]; then
+	die "This is not based on Debian, sorry"
+fi
+
+if ! [[ $(release) == "17.04" ]]; then
+	die "This is only tested on 17.04"
+fi
 
 # Setup a virtualenv with Ansible, install it if needed and
 # activate the environment.
