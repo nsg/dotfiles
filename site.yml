@@ -58,7 +58,6 @@
   tasks:
     - include: configure/vim_plugins.yml
     - include: configure/dotfiles.yml
-  #      #- include: configure/vimperator.yml
   #
   #- name: "Install scripts (with your user)"
   #  hosts: all

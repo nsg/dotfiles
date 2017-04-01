@@ -6,9 +6,6 @@
     - mplayer
     - config
     - config/terminator
-    - vimperator
-    - vimperator/colors
-    - vimperator/plugin
     - config/nvim
 
 - name: "Deploy files (copy)"
@@ -21,5 +18,4 @@
     - config/nvim/init.vim
     - mplayer/config
     - config/terminator/config
-    - vimperatorrc
     - gitconfig
