@@ -34,6 +34,16 @@
         - yamllint
         - retext
 
+- name: Personal systems
+  hosts:
+    - narsil
+  tasks:
+    - name: Install misc software
+      apt: name={{ item }} state=present
+      with_items:
+        - steam
+
+
 - name: Install packages on dummy systems
   hosts: dummy
   become: yes
