@@ -33,6 +33,7 @@
         - python-flake8
         - yamllint
         - retext
+        - remmina
 
 - name: Personal systems
   hosts:
