@@ -32,6 +32,7 @@
         - docker.io
         - python-flake8
         - yamllint
+        - retext
 
 - name: Install packages on dummy systems
   hosts: dummy
