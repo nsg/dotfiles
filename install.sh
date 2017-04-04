@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 message() {
 	echo "$1"
@@ -32,8 +33,12 @@ if [ ! -e /etc/debian_version ]; then
 	die "This is not based on Debian, sorry"
 fi
 
-if ! [[ $(release) == "17.04" ]]; then
-	die "This is only tested on 17.04"
+if [[ $(release) == "17.04" ]]; then
+	:
+elif [[ $(release) == "16.10" ]]; then
+	:
+else
+	die "This is not tested on $(release)"
 fi
 
 # Setup a virtualenv with Ansible, install it if needed and
