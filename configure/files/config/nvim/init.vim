@@ -112,6 +112,8 @@ hi clear SpellLocal
 hi SpellBad cterm=underline ctermfg=red
 hi SpellRare cterm=underline ctermfg=magenta
 hi SpellLocal cterm=underline ctermfg=cyan
+hi NeomakeWarningSign ctermfg=red guifg=orangered
+hi NeomakeWarning cterm=underline ctermfg=red gui=undercurl guisp=orangered
 
 " default formatting rules
 set ts=4 sts=4 sw=4 noexpandtab
