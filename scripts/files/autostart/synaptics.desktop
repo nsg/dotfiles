@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name[en]=Custom Command
-Comment[en]=~/bin/synaptics
-Exec=~/bin/synaptics
-Icon=application-default-icon
-X-GNOME-Autostart-enabled=true
-Type=Application

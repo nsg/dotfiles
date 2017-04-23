@@ -1,67 +1,18 @@
 ---
 
-- name: Clone pathogen.vim
-  git:
-    repo: "https://github.com/tpope/vim-pathogen.git"
-    dest: "~/.vim/git/pathogen.vim"
-    version: bd0c1abcce2acd46330c6edb15457f3f56677e5a # v2.3
-    force: yes
-- name: Install pathogen.vim
-  command: mv ~/.vim/git/pathogen.vim/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim creates="~/.vim/autoload/pathogen.vim"
-
-- name: Clone plugins for Pathogen to manage
-  git:
-    repo: "{{ item.path }}"
-    dest: "~/.vim/bundle/{{ item.name }}"
-    version: "{{ item.version }}"
-    force: yes
-  with_items:
-    - path: https://github.com/pearofducks/ansible-vim.git
-      name: ansible-vim
-      version: 8540ad7ff0f8da2b31b5c55e6ae52ad87221e918
-    - path: https://github.com/scrooloose/nerdtree.git
-      name: nerdtree
-      version: 205367ab3f46dcc88b6ebb819a276e793a21e995 # 4.2.0
-    - path: https://github.com/kien/ctrlp.vim.git
-      name: ctrlp
-      version: c1646e3c28d75bcc834af4836f4c6e12296ba891 # 1.79
-    - path: https://github.com/ekalinin/Dockerfile.vim.git
-      name: Dockerfile.vim
-      version: 1fc71e1c82e1b818d3353c8f1c28afece5e20046
-    - path: https://github.com/tpope/vim-commentary.git
-      name: vim-commentary
-      version: v1.2
-    - path: https://github.com/airblade/vim-gitgutter.git
-      name: vim-gitgutter
-      version: 339f8ba079ed7d465ca442c9032b36bc56c21f61
-    - path: https://github.com/bling/vim-airline.git
-      name: vim-airline
-      version: v0.7
-    - path: https://github.com/majutsushi/tagbar.git
-      name: tagbar
-      version: v2.6.1
-    - path: https://github.com/SirVer/ultisnips.git
-      name: ultisnips
-      version: 3.0
-    - path: https://github.com/rking/ag.vim.git
-      name: ag.vim
-      version: f755abfb1c4e4e3f59f6cfa25ce16edb5af9e516
-    - path: https://github.com/vim-syntastic/syntastic.git
-      name: syntastic
-      version: 3.8.0
-
-- name: Remove plugins for Pathogen to manage
+- name: Prep for vim-plug install
   file:
-    path: "~/.vim/bundle/{{ item.name }}"
-    state: absent
+    path: "{{ item }}"
+    state: directory
   with_items:
-    - name: vim-ansible-yaml
+    - ~/.local/
+    - ~/.local/share/
+    - ~/.local/share/nvim/
+    - ~/.local/share/nvim/site
+    - ~/.local/share/nvim/site/autoload
 
-- name: Download plugins from vim.org to plugin
+- name: Download vim-plug
   get_url:
-    url: "{{ item.url }} "
-    dest: "~/.vim/plugin/{{ item.name }}"
-  with_items:
-    - url: "http://www.vim.org/scripts/download_script.php?src_id=13110"
-      name: "rcs.vim"
-      sha256sum: 76a67192026626cd3bc5903a441019ad5eb5eea1fada85ba6726a81ddcf87231
+    url: "https://raw.githubusercontent.com/junegunn/vim-plug/7f4e6cb843e59c4adf10de985dc35c5447133073/plug.vim"
+    dest: "~/.local/share/nvim/site/autoload/plug.vim"
+    sha256sum: "79c081700dd84383b8ff36b3c9df404fc126194ef9b9badfe3a377563dd58288"

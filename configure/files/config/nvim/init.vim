@@ -1,11 +1,21 @@
 " vim: set sw=4 ts=4 sts=4 et tw=78
 
 ""
-"  pathogen settings
+"  load vim-plug to manage plugins
 ""
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+call plug#begin('~/.local/share/nvim/plugged')
+Plug 'pearofducks/ansible-vim', { 'commit': '8540ad7ff0f8da2b31b5c55e6ae52ad87221e918' }
+Plug 'scrooloose/nerdtree', { 'tag': '5.0.0' }
+Plug 'kien/ctrlp.vim', { 'commit': 'c1646e3c28d75bcc834af4836f4c6e12296ba891' }
+Plug 'ekalinin/Dockerfile.vim', { 'commit': '1fc71e1c82e1b818d3353c8f1c28afece5e20046' }
+Plug 'tpope/vim-commentary', { 'tag': 'v1.2' }
+Plug 'airblade/vim-gitgutter', { 'commit': '339f8ba079ed7d465ca442c9032b36bc56c21f61' }
+Plug 'bling/vim-airline', { 'tag': 'v0.7' }
+Plug 'majutsushi/tagbar', { 'tag': 'v2.6.1' }
+Plug 'SirVer/ultisnips', { 'tag': '3.0' }
+Plug 'rking/ag.vim', { 'commit': 'f755abfb1c4e4e3f59f6cfa25ce16edb5af9e516' }
+Plug 'neomake/neomake', { 'commit': 'bd6e99c9470f5ef2fdcff5094e11998464129053' }
+call plug#end()
 
 ""
 " My settings
@@ -16,8 +26,8 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " NerdTree
-"autocmd VimEnter * if !argc() | NERDTree | endif
-"autocmd BufEnter * if !argc() | NERDTreeMirror | endif
+autocmd VimEnter * if !argc() | NERDTree | endif
+autocmd BufEnter * if !argc() | NERDTreeMirror | endif
 nmap <F5> :NERDTreeToggle<CR>
 nmap <F6> :NERDTreeFind<CR>
 
@@ -55,52 +65,29 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Hack, the spellcheck for Ansible is broken so this is a fast
-" way to toggle to yaml-mode to check my spelling.
-function! SpellCheckHack()
-	if &filetype == "ansible"
-		set filetype=yaml
-	else
-		set filetype=ansible
-	endif
-endfunction
-
-" Spellchecking
-set spelllang=en_us
-nmap <F2> :call SpellCheckHack()<CR>
+" Neomake
+autocmd! BufWritePost,BufReadPost * Neomake
+let g:neomake_ansible_enabled_makers = ['yamllint']
+let g:neomake_ansible_yamllint_maker = neomake#makers#ft#yaml#yamllint()
 
 " Set/remove options
 set nocompatible					" Enable fancy improved stuff!
-set autoindent						" Automatic ident
 set smartindent						" Smart idents
 set showmatch						" Show matching brackets
-set incsearch						" Search while we type
 set background=dark					" We like dark backgrounds
 set number							" Show line numbers
 set shiftround						" Round indent to multiple of 'shiftwidth'
 set foldenable						" Enable folds
 set showcmd							" Show partial commands in status line and
 									" Selected characters/lines in visual mode
-set smarttab						" Smarter tab idents
 set backup							" Enable vim backups
-set backupdir=~/.vim/backup			" Set vim backup directory
-set directory=~/.vim/tmp			" Set vim temporary directory
 set nojoinspaces					" Prevents inserting two spaces after a J
 set list							" Show hidden chars
 set listchars-=eol:$				" Hide eol
 set listchars+=tab:→\ 				" Show tabs
 set listchars+=trail:■
 set t_Co=256
+set mouse=c
 
 " misc maps
 inoremap <Down> <C-o>gj
@@ -117,7 +104,6 @@ nnoremap <SPACE> <Nop>				" Disable spacebar
 let mapleader = " "					" Set spacebar to leader
 
 " syntax
-syntax on
 colorscheme desert
 hi clear SpellBad
 hi clear SpellCap
@@ -126,6 +112,8 @@ hi clear SpellLocal
 hi SpellBad cterm=underline ctermfg=red
 hi SpellRare cterm=underline ctermfg=magenta
 hi SpellLocal cterm=underline ctermfg=cyan
+hi NeomakeWarningSign ctermfg=red guifg=orangered
+hi NeomakeWarning cterm=underline ctermfg=red gui=undercurl guisp=orangered
 
 " default formatting rules
 set ts=4 sts=4 sw=4 noexpandtab

@@ -12,3 +12,5 @@
 	publish = "!git push -u origin $(git branch-name)"
 	up = "!git fetch origin && git rebase -i origin/master"
 	bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+[core]
+	excludesfile = /home/nsg/.gitignore

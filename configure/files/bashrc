@@ -356,7 +356,7 @@ __a_compl() {
     local git_root="$(git rev-parse --show-toplevel)"
     ls -1 $git_root/playbooks/ | tr '\n' ' '
 }
-complete -W "$(__a_compl)" a
+#complete -W "$(__a_compl)" a
 
 a() {
     local playbook="$1"; shift

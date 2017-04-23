@@ -3,18 +3,10 @@
 - name: Make directories
   file: path=~/.{{ item }} state=directory
   with_items:
-    - vim
-    - vim/backup
-    - vim/tmp
-    - vim/doc
-    - vim/autoload
-    - vim/plugin
     - mplayer
     - config
-    - config/terminator
-    - vimperator
-    - vimperator/colors
-    - vimperator/plugin
+    - config/nvim
+    - config/yamllint
 
 - name: "Deploy files (copy)"
   copy:
@@ -23,8 +15,8 @@
   with_items:
     - bashrc
     - inputrc
-    - vimrc
+    - config/nvim/init.vim
+    - config/yamllint/config
     - mplayer/config
-    - config/terminator/config
-    - vimperatorrc
     - gitconfig
+    - gitignore

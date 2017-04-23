@@ -1,39 +1,89 @@
 ---
 
-- name: Install packages
+- name: Update inventory
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Place our host in a group with our hostname
+      add_host:
+        group: "{{ ansible_hostname }}"
+        name: "127.0.0.1"
+
+- name: Install packages on all systems
   hosts: all
   become: yes
   tasks:
-
-    - include: install/docker.yml
-    - include: install/openafs.yml
-      when: ansible_distribution_release == "freya" and ansible_hostname != 'dagmor'
     - include: install/github-hub.yml
-      #- include: install/spotify.yml
+    - include: install/spotify.yml
+
+    - block:
+      - name: "Setup neovim ppa (if needed)"
+        apt_repository:
+          repo: 'ppa:neovim-ppa/unstable'
+
+      - name: Install deps for neovim python module
+        apt:
+          name: "{{ item }}"
+        with_items:
+          - python3-dev
+          - python3-pip
+
+      - name: Install the neovim pip3 package
+        pip:
+          name: neovim
+          executable: pip3
+      when: ansible_distribution_version == "16.10"
 
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
-      - vim
-      - mercurial
-      - git
-      - terminator
-      - chromium-browser
-      - virtualbox
-      - curl
-      - sshpass
-      - pandoc
-      - meld
-      - firefox
-      - ctags
-      - silversearcher-ag
-      - tig
+        - neovim
+        - chromium-browser
+        - curl
+        - sshpass
+        - pandoc
+        - meld
+        - firefox
+        - ctags
+        - silversearcher-ag
+        - tig
+        - docker.io
+        - python-flake8
+        - yamllint
+        - retext
+        - remmina
+        - make
+        - tree
+        - pavucontrol
+        - synapse
 
-    - name: Install with pip
-      pip:
-        name: "{{ item }}"
+- name: Personal systems
+  hosts:
+    - narsil
+  tasks:
+    - name: Install misc software
+      apt: name={{ item }} state=present
       with_items:
-        - flake8
+        - steam
+        - heimdal-clients
+
+
+- name: Install packages on dummy systems
+  hosts: dummy
+  become: yes
+  tasks:
+
+    - name: Add webupd8team terminix PPA
+      apt_repository:
+        repo: 'ppa:webupd8team/terminix'
+
+    - name: Install misc software
+      apt: name={{ item }} state=present
+      with_items:
+        - mercurial
+        - git
+        - virtualbox
+        - terminix
 
     - include: install/deb-install.yml
       vars:
@@ -42,18 +92,15 @@
           url: "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
           sha256sum: 30ee435c3358c6a835ea52cf710f4e50caa0e77cb721332132a2d3386a8745d9
 
-- name: "Configure dotfiles (with your user)"
+- name: "Configure all systems (with your user)"
   hosts: all
-  sudo: no
+  become: no
   user: "{{ ansible_env.USER }}"
   tasks:
-    - include: configure/dotfiles.yml
     - include: configure/vim_plugins.yml
-    - include: configure/vimperator.yml
+    - include: configure/dotfiles.yml
 
-- name: "Install scripts (with your user)"
-  hosts: all
-  sudo: no
-  user: "{{ ansible_env.USER }}"
-  tasks:
-    - include: scripts/scripts.yml
+    - name: "Make sure we have ~/bin"
+      file:
+        path: "~/bin"
+        state: directory
