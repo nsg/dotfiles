@@ -52,6 +52,10 @@
         - yamllint
         - retext
         - remmina
+        - make
+        - tree
+        - pavucontrol
+        - synapse
 
 - name: Personal systems
   hosts:
@@ -61,6 +65,7 @@
       apt: name={{ item }} state=present
       with_items:
         - steam
+        - heimdal-clients
 
 
 - name: Install packages on dummy systems
