@@ -50,10 +50,10 @@ case "$TERM" in
 esac
 
 # https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
+# The function is called from post_prompt
 if [[ $TILIX_ID ]] || [[ $TERMINIX_ID ]]; then
     if [ -e /etc/profile.d/vte.sh ]; then
         . /etc/profile.d/vte.sh
-        PS1="$PS1$(__vte_osc7)"
     fi
 fi
 
@@ -78,6 +78,9 @@ function post_prompt() {
 
     local yellow=$(tput setaf 3)
     local white=$(tput setaf 7)
+
+    # Output control chars for VTE terminals
+    __vte_osc7
 
     echo -en $yellow
 
