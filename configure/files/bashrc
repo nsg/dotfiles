@@ -49,6 +49,14 @@ case "$TERM" in
         ;;
 esac
 
+# https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
+if [[ $TILIX_ID ]] || [[ $TERMINIX_ID ]]; then
+    if [ -e /etc/profile.d/vte.sh ]; then
+        . /etc/profile.d/vte.sh
+        PS1="$PS1$(__vte_osc7)"
+    fi
+fi
+
 function ssh-nk() {
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $@
 }
