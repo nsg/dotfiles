@@ -114,8 +114,6 @@ fi
 # Alias
 ##
 
-alias ll='ls -l'
-
 if hash xdg-open 2>&1 > /dev/null; then
     alias o='xdg-open'
 else
