@@ -115,7 +115,12 @@ fi
 ##
 
 alias ll='ls -l'
-alias o='gnome-open'
+
+if hash xdg-open 2>&1 > /dev/null; then
+    alias o='xdg-open'
+else
+    alias o='gnome-open'
+fi
 
 ##
 # Completion
