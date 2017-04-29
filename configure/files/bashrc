@@ -53,19 +53,6 @@ function ssh-nk() {
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $@
 }
 
-# Convert a mardown file to html and view it in firefox
-function mdview() {
-	echo '
-	<link rel="stylesheet" href="https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css">
-	' > /tmp/header-mdview.tmpl
-	echo '<div class="markdown-body">' > /tmp/before-mdview.tmpl
-	echo '</div>' > /tmp/after-mdview.tmpl
-    pandoc -f markdown_github --self-contained \
-		-H /tmp/header-mdview.tmpl -B /tmp/before-mdview.tmpl -A /tmp/after-mdview.tmpl $1 \
-		| firefox -new-window "data:text/html;base64,$(base64 -w 0 <&0)" \
-		> /dev/null 2>&1
-}
-
 function pre_prompt() {
 
     local yellow="\[$(tput setaf 3)\]"
