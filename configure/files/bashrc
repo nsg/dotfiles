@@ -251,7 +251,7 @@ function krb() {
 
     # Remove opts from input
     shift $((OPTIND-1))
-        
+
     # Select cell
     if [[ $1 == nsg ]]; then
         local cell=@STACKEN.KTH.SE
@@ -268,7 +268,7 @@ function krb() {
 
     # Check for expired tickets
     klist | grep Expired -q
-    if [ $? == 0 ]; then 
+    if [ $? == 0 ]; then
         rm $KRB5CCNAME
         echo "Expired credentials, old credentials removed."
     fi
