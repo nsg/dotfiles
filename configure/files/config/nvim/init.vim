@@ -88,6 +88,7 @@ set listchars+=tab:→\ 				" Show tabs
 set listchars+=trail:■
 set t_Co=256
 set mouse=c
+set nobackup
 
 " misc maps
 inoremap <Down> <C-o>gj
