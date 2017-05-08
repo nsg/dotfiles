@@ -54,6 +54,8 @@ esac
 if [[ $TILIX_ID ]] || [[ $TERMINIX_ID ]]; then
     if [ -e /etc/profile.d/vte.sh ]; then
         . /etc/profile.d/vte.sh
+    elif [ -e /etc/profile.d/vte-*.sh ]; then
+        . /etc/profile.d/vte-*.sh
     fi
 fi
 
