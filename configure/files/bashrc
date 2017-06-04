@@ -82,7 +82,7 @@ function post_prompt() {
     local white=$(tput setaf 7)
 
     # Output control chars for VTE terminals
-    __vte_osc7
+    declare -f __vte_osc7 > /dev/null && __vte_osc7
 
     echo -en $yellow
 
