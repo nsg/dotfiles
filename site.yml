@@ -17,21 +17,21 @@
     - include: install/spotify.yml
 
     - block:
-      - name: "Setup neovim ppa (if needed)"
-        apt_repository:
-          repo: 'ppa:neovim-ppa/unstable'
+        - name: "Setup neovim ppa (if needed)"
+          apt_repository:
+            repo: 'ppa:neovim-ppa/unstable'
 
-      - name: Install deps for neovim python module
-        apt:
-          name: "{{ item }}"
-        with_items:
-          - python3-dev
-          - python3-pip
+        - name: Install deps for neovim python module
+          apt:
+            name: "{{ item }}"
+          with_items:
+            - python3-dev
+            - python3-pip
 
-      - name: Install the neovim pip3 package
-        pip:
-          name: neovim
-          executable: pip3
+        - name: Install the neovim pip3 package
+          pip:
+            name: neovim
+            executable: pip3
       when: ansible_distribution_version == "16.10"
 
     - name: Install misc software
