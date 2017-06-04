@@ -15,6 +15,7 @@ Plug 'majutsushi/tagbar', { 'tag': 'v2.6.1' }
 Plug 'SirVer/ultisnips', { 'tag': '3.0' }
 Plug 'rking/ag.vim', { 'commit': 'f755abfb1c4e4e3f59f6cfa25ce16edb5af9e516' }
 Plug 'neomake/neomake', { 'commit': 'bd6e99c9470f5ef2fdcff5094e11998464129053' }
+Plug 'rust-lang/rust.vim', { 'commit': 'b77ac8ecbd4baaa23cca612e1c9b3df5ea23da9b' }
 call plug#end()
 
 ""
