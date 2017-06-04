@@ -122,7 +122,7 @@ set ts=4 sts=4 sw=4 noexpandtab
 au BufRead,BufNewFile *.rb,*.rhtml,*.yml,Vagrantfile set sts=2 sw=2 expandtab
 au BufRead,BufNewFile *.py,*.py.*,*.java,*.c,*.h,*.cpp set expandtab
 au BufNewFile,BufRead *.gradle setf groovy
-au BufRead,BufNewFile *.yml set filetype=ansible spell
+au BufRead,BufNewFile *.yml,*.yaml set filetype=ansible spell
 au BufRead,BufNewFile *.md set filetype=markdown spell
 au BufRead,BufNewFile COMMIT_EDITMSG set spell
 au FileType vim set spell
