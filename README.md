@@ -1,5 +1,9 @@
 # nsg/dotfiles
 
-Hello, this repo contains my public dotfiles.
+This repository contains configuration and installation of
+software on my systems. To browse my dotfiles see
+`configure/files/`, the files are relative to `$HOME`.
 
-I use ansible to deploy this, just type `./install.sh` to install everyting on localhost.
+## Install
+
+I use Ansible to deploy this, just type `./install.sh` to install everyting on localhost.
