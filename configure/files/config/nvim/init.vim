@@ -5,7 +5,7 @@
 ""
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'pearofducks/ansible-vim', { 'commit': '8540ad7ff0f8da2b31b5c55e6ae52ad87221e918' }
-Plug 'scrooloose/nerdtree', { 'tag': '5.0.0' }
+Plug 'scrooloose/nerdtree', { 'commit': '2e43ad074bb3b7fafc77b9eea5098047d6fe6e90' }
 Plug 'kien/ctrlp.vim', { 'commit': 'c1646e3c28d75bcc834af4836f4c6e12296ba891' }
 Plug 'ekalinin/Dockerfile.vim', { 'commit': '1fc71e1c82e1b818d3353c8f1c28afece5e20046' }
 Plug 'tpope/vim-commentary', { 'tag': 'v1.2' }
