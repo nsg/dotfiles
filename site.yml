@@ -58,7 +58,7 @@
         - synapse
         - whois
 
-- name: Personal systems
+- name: Personal systems (type 1)
   hosts:
     - narsil
   tasks:
@@ -68,6 +68,15 @@
         - steam
         - heimdal-clients
 
+- name: Personal systems (type 2)
+  hosts:
+    - narsil
+    - ringil
+  tasks:
+    - name: Install misc software
+      apt: name={{ item }} state=present
+      with_items:
+        - cmake
 
 - name: Install packages on dummy systems
   hosts: dummy
