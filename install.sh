@@ -57,11 +57,12 @@ fi
 # Ansible needs a few libs and gcc, so make sure that they are installed
 install_package python-dev
 install_package libssl-dev
+install_package libffi-dev
 install_package gcc
 
 if [ ! -e "$SCRIPTPATH/.env/bin/ansible" ]; then
 	message "Install ansible with pip"
-	pip install ansible==2.2.2
+	pip install ansible==2.3.1
 fi
 
 export ANSIBLE_NOCOWS=1 # kill the cow!
