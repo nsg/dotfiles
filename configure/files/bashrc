@@ -417,3 +417,8 @@ c() {
 
     cd ~/code/*${scope}*/*${project}*
 }
+
+# Workaround for https://github.com/neovim/neovim/issues/6802
+vim() {
+    COLORTERM=gnome-terminal nvim
+}
