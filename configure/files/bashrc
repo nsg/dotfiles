@@ -420,5 +420,5 @@ c() {
 
 # Workaround for https://github.com/neovim/neovim/issues/6802
 vim() {
-    COLORTERM=gnome-terminal nvim
+    COLORTERM=gnome-terminal nvim $@
 }
