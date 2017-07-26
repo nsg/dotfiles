@@ -12,5 +12,11 @@
 	publish = "!git push -u origin $(git branch-name)"
 	up = "!git fetch origin && git rebase -i origin/master"
 	bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+	log-graph = "log --graph --all  --decorate --oneline"
+	gg = "grep --break --heading --line-number"
+	ls-ignored = "ls-files --others --i --exclude-standard"
+	pullf = "pull --ff-only"
+	updatesubmodules = "submodule update --init --recursive"
+	rebasestash = "!git stash && git rebase -i && git stash pop"
 [core]
 	excludesfile = /home/nsg/.gitignore
