@@ -67,7 +67,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Neomake
-autocmd! BufWritePost,BufReadPost * Neomake
+autocmd! BufWritePost,BufReadPost *.rs Neomake! cargo
+autocmd! BufWritePost,BufReadPost * if index(['rust'], &ft) < 0 | Neomake
 let g:neomake_ansible_enabled_makers = ['yamllint']
 let g:neomake_ansible_yamllint_maker = neomake#makers#ft#yaml#yamllint()
 
