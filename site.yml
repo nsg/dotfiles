@@ -57,6 +57,8 @@
         - pavucontrol
         - synapse
         - whois
+        - lxd
+        - lxd-client
 
 - name: Personal systems (type 1)
   hosts:
