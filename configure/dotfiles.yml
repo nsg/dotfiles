@@ -7,6 +7,7 @@
     - config
     - config/nvim
     - config/yamllint
+    - config/bashrc
 
 - name: "Deploy files (copy)"
   copy:
@@ -20,3 +21,11 @@
     - mplayer/config
     - gitconfig
     - gitignore
+
+- name: "Deploy directories (copy)"
+  copy:
+    src: "configure/files/{{ item.src }}"
+    dest: "~/.{{ item.dest }}"
+  with_items:
+    - src: config/bashrc
+      dest: config/
