@@ -16,6 +16,7 @@ Plug 'SirVer/ultisnips', { 'tag': '3.0' }
 Plug 'rking/ag.vim', { 'commit': 'f755abfb1c4e4e3f59f6cfa25ce16edb5af9e516' }
 Plug 'neomake/neomake', { 'commit': 'bd6e99c9470f5ef2fdcff5094e11998464129053' }
 Plug 'rust-lang/rust.vim', { 'commit': 'b77ac8ecbd4baaa23cca612e1c9b3df5ea23da9b' }
+Plug 'cespare/vim-toml', { 'commit': '15a5798966a15210e60c3f4addc2c6ce4114916a' }
 call plug#end()
 
 ""
