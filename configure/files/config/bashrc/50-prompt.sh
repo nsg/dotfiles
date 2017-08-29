@@ -46,6 +46,10 @@ pre_prompt() {
         fi
     fi
 
+    if [ ! -z $VIRTUAL_ENV ]; then
+        echo -en "${yellow}${VIRTUAL_ENV##*/} "
+    fi
+
 }
 
 post_prompt() {
