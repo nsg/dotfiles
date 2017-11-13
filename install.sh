@@ -37,6 +37,8 @@ if [[ $(release) == "17.04" ]]; then
 	:
 elif [[ $(release) == "16.10" ]]; then
 	:
+elif [[ $(release) == "17.10" ]]; then
+	:
 else
 	die "This is not tested on $(release)"
 fi

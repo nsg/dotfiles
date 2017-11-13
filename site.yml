@@ -98,16 +98,16 @@
     - include: install/deb-install.yml
       vars:
         deb:
-          name: slack-desktop-2.7.0-amd64.deb
-          url: "https://downloads.slack-edge.com/linux_releases/slack-desktop-2.7.0-amd64.deb"
-          sha256sum: 0f602b50a78c0d16bfd820f6fe28f9692fb2ae6e196c19a8c40053e830d44adf
+          name: slack-desktop-2.8.2-amd64.deb
+          url: "https://downloads.slack-edge.com/linux_releases/slack-desktop-2.8.2-amd64.deb"
+          sha256sum: 75661e19efc7c9760f481a9688e5d6e24a2bdc830bda60ca5ec9876a64fc2f05
 
-    - include: install/deb-install.yml
-      vars:
-        deb:
-          name: google-chrome-stable_current_amd64.deb
-          url: "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-          sha256sum: 936eb6dbf6062b4a375593d3289375d3f7823d3168673534f54f037d632283d3
+#    - include: install/deb-install.yml
+#      vars:
+#        deb:
+#          name: google-chrome-stable_current_amd64.deb
+#          url: "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+#          sha256sum: 936eb6dbf6062b4a375593d3289375d3f7823d3168673534f54f037d632283d3
 
 - name: Install packages on dummy systems
   hosts: dummy
