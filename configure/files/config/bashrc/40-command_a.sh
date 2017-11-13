@@ -3,7 +3,7 @@
 a() {
     local playbook="$1"; shift
     local git_root="$(git rev-parse --show-toplevel)"
-    local inventory_path="$(find $git_root -name inventory.py | sort | tail -1)"
+    local inventory_path="$(find $git_root/hosts -name inventory.py | sort | tail -1)"
 
     if [ ! -e "$playbook" ]; then
         playbook=$(echo ${git_root}/playbooks/*${playbook}*/site.yml)
