@@ -67,22 +67,10 @@
   become: yes
   tasks:
 
-    - name: Add webupd8team terminix PPA
-      apt_repository:
-        repo: 'ppa:webupd8team/terminix'
-
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
         - mercurial
-        - terminix
-
-    - include: install/deb-install.yml
-      vars:
-        deb:
-          name: slack-desktop-2.8.2-amd64.deb
-          url: "https://downloads.slack-edge.com/linux_releases/slack-desktop-2.8.2-amd64.deb"
-          sha256sum: 75661e19efc7c9760f481a9688e5d6e24a2bdc830bda60ca5ec9876a64fc2f05
 
 - name: Install packages on dummy systems
   hosts: dummy
