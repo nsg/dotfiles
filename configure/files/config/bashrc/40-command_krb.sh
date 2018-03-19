@@ -58,9 +58,9 @@ krb() {
                 ;;
             h)
                 echo "nsg          check out nsg@STACKEN.KTH.SE"
-                echo "-r stefan    check out stefan/root@SOUTHPOLE.SE"
-                echo "-a stefan    check out stefan/admin@SOUTHPOLE.SE"
-                echo "-g stefan    check out stefan@SOUTHPOLE.SE to global namespace"
+                echo "-r nsg       check out nsg/root@STACKEN.KTH.SE"
+                echo "-a nsg       check out nsg/admin@STACKEN.KTH.SE"
+                echo "-g nsg       check out nsg@STACKEN.KTH.se to global namespace"
                 echo "-d           return to global namespace"
                 echo "-D           return to global namespace AND destory ticket"
                 echo "-l           list principals"
@@ -88,8 +88,8 @@ krb() {
     # Select cell
     if [[ $1 == nsg ]]; then
         local cell=@STACKEN.KTH.SE
-    elif [[ $1 == stefan ]]; then
-        local cell=@SOUTHPOLE.SE
+    else
+        local cell=@INTERNT.SVT.SE
     fi
 
     # Local och global namespace
