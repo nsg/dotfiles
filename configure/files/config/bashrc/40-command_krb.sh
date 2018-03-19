@@ -48,7 +48,7 @@ krb() {
                 return 0 # no more action
                 ;;
             v)
-                if [ -f $KRB5CCNAME ]; then
+                if [ -f ${KRB5CCNAME#*:} ]; then
                     klist -t
                     if [ $? == 0 ]; then
                         klist | grep Principal: | awk '{print $NF}' | awk -F@ '{print $1}'
