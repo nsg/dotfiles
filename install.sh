@@ -33,7 +33,7 @@ if [ ! -e /etc/debian_version ]; then
 	die "This is not based on Debian, sorry"
 fi
 
-if [[ $(release) == "17.04" ]]; then
+if [[ $(release) == "18.04" ]]; then
 	:
 elif [[ $(release) == "17.10" ]]; then
 	:

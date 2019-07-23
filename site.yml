@@ -21,18 +21,11 @@
         - neovim
         - chromium-browser
         - curl
-        - sshpass
-        - pandoc
-        - meld
-        - firefox
         - ctags
         - silversearcher-ag
         - tig
-        - docker.io
         - python-flake8
         - yamllint
-        - retext
-        - remmina
         - make
         - tree
         - pavucontrol
@@ -40,16 +33,8 @@
         - lxd
         - lxd-client
         - gnome-mpv
-
-- name: Personal Workstation
-  hosts:
-    - narsil
-  tasks:
-    - name: Install misc software
-      apt: name={{ item }} state=present
-      with_items:
-        - steam
-        - heimdal-clients
+        - tilix
+        - dconf-editor
 
 - name: Personal Workstation and Laptop
   hosts:
@@ -60,41 +45,6 @@
       apt: name={{ item }} state=present
       with_items:
         - cmake
-        - tilix
-
-- name: Install packages on work systems
-  hosts: sting
-  become: yes
-  tasks:
-
-    - name: Install misc software
-      apt: name={{ item }} state=present
-      with_items:
-        - mercurial
-
-- name: Install packages on dummy systems
-  hosts: dummy
-  become: yes
-  tasks:
-
-    - name: Add webupd8team terminix PPA
-      apt_repository:
-        repo: 'ppa:webupd8team/terminix'
-
-    - name: Install misc software
-      apt: name={{ item }} state=present
-      with_items:
-        - mercurial
-        - git
-        - virtualbox
-        - terminix
-
-    - include: install/deb-install.yml
-      vars:
-        deb:
-          name: vagrant_1.8.5_x86_64.deb
-          url: "https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb"
-          sha256sum: 30ee435c3358c6a835ea52cf710f4e50caa0e77cb721332132a2d3386a8745d9
 
 - name: "Configure all systems (with your user)"
   hosts: all
