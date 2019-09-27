@@ -30,8 +30,6 @@
         - tree
         - pavucontrol
         - whois
-        - lxd
-        - lxd-client
         - gnome-mpv
         - tilix
         - dconf-editor
