@@ -39,7 +39,7 @@ pre_prompt() {
 
     local yellow="\[$(tput setaf 3)\]"
 
-    if [ -f /usr/bin/klist ]; then
+    if [ -f /usr/bin/klist ] && [[ $HOSTNAME != L* ]]; then
         /usr/bin/klist > /dev/null 2>&1
         if [ $? == 0 ]; then
             echo -en "${yellow}$(krb -v) "
