@@ -38,11 +38,13 @@
   hosts:
     - narsil
     - ringil
+    - glamdring
   tasks:
     - name: Install misc software
       apt: name={{ item }} state=present
       with_items:
         - cmake
+        - heimdal-clients
 
 - name: "Configure all systems (with your user)"
   hosts: all
