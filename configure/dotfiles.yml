@@ -1,8 +1,10 @@
 ---
 
 - name: Make directories
-  file: path=~/.{{ item }} state=directory
-  with_items:
+  file:
+    path: "~/.{{ item }}"
+    state: directory
+  loop:
     - mplayer
     - config
     - config/nvim
@@ -13,7 +15,7 @@
   copy:
     src: "configure/files/{{ item }}"
     dest: "~/.{{ item }}"
-  with_items:
+  loop:
     - bashrc
     - inputrc
     - config/nvim/init.vim
@@ -26,6 +28,6 @@
   copy:
     src: "configure/files/{{ item.src }}"
     dest: "~/.{{ item.dest }}"
-  with_items:
+  loop:
     - src: config/bashrc
       dest: config/
