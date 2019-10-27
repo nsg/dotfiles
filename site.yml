@@ -37,7 +37,7 @@
 
     - name: Install classic snaps
       snap:
-        name: vscode
+        name: code
         classic: yes
 
 - name: Personal Workstation and Laptop
