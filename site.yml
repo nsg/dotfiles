@@ -51,6 +51,7 @@
         name:
           - cmake
           - heimdal-clients
+          - docker.io
 
 - name: Tweaks for my T490
   hosts:
