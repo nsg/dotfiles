@@ -35,6 +35,11 @@
           - dconf-editor
           - hub
 
+    - name: Install classic snaps
+      snap:
+        name: vscode
+        classic: yes
+
 - name: Personal Workstation and Laptop
   hosts:
     - narsil
