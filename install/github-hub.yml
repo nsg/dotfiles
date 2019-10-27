@@ -1,64 +1,19 @@
 ---
 
-- name: Set facts
-  set_fact:
-    version: "2.2.9"
-    hash: "5867647071007add582f911867fb4973354c51690ac20aecb2e73be7440875a3"
+#
+# The hub command is now installed from the repo
+# This file is here to clean up the old manual install
+#
 
-- name: Prep the system for local facts
+- name: Remove old hub files
   file:
     path: "{{ item }}"
-    state: directory
+    state: absent
   loop:
-    - /etc/ansible
-    - /etc/ansible/facts.d
-
-- block:
-  - name: Download hub command
-    get_url:
-      url: "https://github.com/github/hub/releases/download/v{{ version }}/hub-linux-amd64-{{ version }}.tgz"
-      dest: /tmp/hub.tgz
-      sha256sum: "{{ hash }}"
-    register: downloaded_hub
-
-  - name: Unarchive hub command
-    unarchive:
-      copy: no
-      src: /tmp/hub.tgz
-      dest: /tmp
-    when: downloaded_hub|changed
-
-  - name: Move files in place
-    command: "mv /tmp/hub-linux-amd64-{{ version }}/{{ item.from }} {{ item.to }}"
-    loop:
-      - from: bin/hub
-        to: /usr/local/bin/hub
-      - from: share/man/man1/hub.1
-        to: /usr/share/man/man1/hub.1
-      - from: etc/hub.bash_completion.sh
-        to: /etc/bash_completion.d/hub.bash_completion.sh
-    when: downloaded_hub|changed
-
-  - name: Set execute permission
-    file:
-      path: /usr/local/bin/hub
-      mode: 0755
-
-  - name: Record the installed version in the local facts
-    copy:
-      dest: "/etc/ansible/facts.d/github_hub.fact"
-      content: "[installed]\nversion={{ version }}\n"
-
-  always:
-    - name: Remove temporary files
-      file:
-        path: "{{ item }}"
-        state: absent
-      loop:
-        - "/tmp/hub.tgz"
-        - "/tmp/hub-linux-amd64-{{ version }}"
-
+    - "/usr/local/bin/hub"
+    - "/usr/share/man/man1/hub.1"
+    - "/etc/bash_completion.d/hub.bash_completion.sh"
+    - "/etc/ansible/facts.d/github_hub.fact"
   when: >
-    ansible_local is not defined or
-    ansible_local.github_hub is not defined or
-    ansible_local.github_hub.installed.version != version
+    ansible_local is defined and
+    ansible_local.github_hub is defined

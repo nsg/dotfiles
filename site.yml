@@ -33,6 +33,7 @@
           - gnome-mpv
           - tilix
           - dconf-editor
+          - hub
 
 - name: Personal Workstation and Laptop
   hosts:
