@@ -47,6 +47,67 @@
           - cmake
           - heimdal-clients
 
+- name: Tweaks for my T490
+  hosts:
+    - glamdring
+
+  tasks:
+    - name: Configure thinkpad_acpi kernel module
+      copy:
+        content: "options thinkpad_acpi fan_control=1\n"
+        dest: /etc/modprobe.d/thinkfan.conf
+      register: reboot_now
+
+    - assert:
+        that:
+          - reboot_now is not changed
+        fail_msg: "Please reboot the system now, and run this again!"
+
+    - name: Install packages
+      apt:
+        name:
+          - thinkfan
+          - nvme-cli
+
+    - name: Deploy thinkfan-detect
+      copy:
+        src: files/thinkfan-detect
+        dest: /usr/local/bin/thinkfan-detect
+        mode: 0755
+
+    - name: Deploy tpthermals
+      copy:
+        src: files/tpthermals.sh
+        dest: /usr/local/bin/tpthermals
+        mode: 0755
+
+    - name: Deploy tpthermals unitfile
+      copy:
+        src: files/tpthermal.service
+        dest: /etc/systemd/system/tpthermal.service
+        mode: 0755
+
+    - name: Make ovverides directory for systemd unit
+      file:
+        path: /etc/systemd/system/thinkfan.service.d
+        state: directory
+
+    - name: Add pre-script to thinkfan unitfile
+      copy:
+        content: "[Service]\nExecStartPre=/usr/local/bin/thinkfan-detect\n"
+        dest: /etc/systemd/system/thinkfan.service.d/detect.conf
+      register: reload_systemd
+
+    - name: Reload systemd and start services
+      systemd:
+        daemon_reload: yes
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      loop:
+        - thinkfan
+        - tpthermal
+
 - name: "Configure all systems (with your user)"
   hosts: all
   become: no

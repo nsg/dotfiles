@@ -1,0 +1,11 @@
+[Unit]
+Description=Service for tpthermal
+Wants=NetworkManager.service
+After=multi-user.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/tpthermals
+
+[Install]
+WantedBy=multi-user.target
