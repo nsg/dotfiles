@@ -6,6 +6,7 @@ After=multi-user.target network-online.target
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/tpthermals
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
