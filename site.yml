@@ -39,8 +39,11 @@
 
     - name: Install classic snaps
       snap:
-        name: code
+        name: "{{ item }}"
         classic: yes
+      loop:
+        - code
+        - snapcraft
 
     - name: Add flathub repo
       flatpak_remote:
