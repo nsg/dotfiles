@@ -110,7 +110,11 @@
 
     - name: Add pre-script to thinkfan unitfile
       copy:
-        content: "[Service]\nExecStartPre=/usr/local/bin/thinkfan-detect\n"
+        content: |
+          [Service]
+          ExecStartPre=/usr/local/bin/thinkfan-detect
+          Restart=on-failure
+          RestartSec=60s
         dest: /etc/systemd/system/thinkfan.service.d/detect.conf
       register: reload_systemd
 
