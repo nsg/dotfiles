@@ -11,6 +11,10 @@ send_data() {
     echo $to_send | nc -q0 grafana.stacken.kth.se 2003
 }
 
+using_nvidia() {
+  prime-select query | grep -q nvidia
+}
+
 read_sensors() {
     local coretemp=$(($(cat $SENSOR_CORETEMP) / 1000 ))
     local acpitz=$(($(cat $SENSOR_ACPITZ) / 1000 ))
@@ -30,6 +34,11 @@ read_sensors() {
     for n in 0 1 2 3 4 5 6 7; do
         send_data cpu-$n ${cpu_mhz[$n]}
     done
+
+    if using_nvidia; then
+      local nvidia_coretemp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
+      send_data nvidia $nvidia_coretemp
+    fi
 }
 
 for sensor in $(find /sys/devices -type f -name "temp*_input"); do
