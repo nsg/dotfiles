@@ -47,5 +47,5 @@ echo '
 (3,	70,	85)
 (4,	75,	87)
 (5,	80,	90)
-(7,	80,	32767)
+(7,	85,	32767)
 ' | cat /etc/thinkfan.detect.conf - > /etc/thinkfan.conf
