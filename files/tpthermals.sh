@@ -23,9 +23,11 @@ read_sensors() {
     local nvme=$(nvme smart-log $NVME_DISK | awk '/^temperature/{ print $3 }')
 
     local fan=($(awk '{ print $2 }' /proc/acpi/ibm/fan))
+    local fan_level=$(awk '/^level/{ print $2 }' /proc/acpi/ibm/fan)
     local cpu_mhz=($(awk '/^cpu MHz/{ print $NF }' /proc/cpuinfo))
 
     send_data fan ${fan[1]}
+    send_data fanlevel $fan_level
     send_data coretemp $coretemp
     send_data acpitz $acpitz
     send_data iwlwifi $iwlwifi
