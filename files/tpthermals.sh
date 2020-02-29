@@ -12,7 +12,7 @@ send_data() {
 }
 
 using_nvidia() {
-  prime-select query | grep -q nvidia
+  prime-select query | grep -Eq 'nvidia|on-demand'
 }
 
 read_sensors() {
