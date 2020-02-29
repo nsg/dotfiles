@@ -24,7 +24,6 @@
           - ctags
           - silversearcher-ag
           - tig
-          - python-flake8
           - yamllint
           - make
           - tree
@@ -35,7 +34,6 @@
           - dconf-editor
           - hub
           - flatpak
-          - gnome-software-plugin-flatpak
 
     - name: Install classic snaps
       snap:
