@@ -56,6 +56,7 @@ fi
 
 # Ansible needs a few libs and gcc, so make sure that they are installed
 install_package python3-dev
+install_package python3-psutil
 install_package libssl-dev
 install_package libffi-dev
 install_package gcc

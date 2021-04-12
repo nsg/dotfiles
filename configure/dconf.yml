@@ -1,0 +1,27 @@
+---
+
+- name: Configure Tilix
+  dconf:
+    key: "/com/gexperts/Tilix/{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop:
+    - key: "copy-on-select"
+      value: "true"
+    - key: "auto-hide-mouse"
+      value: "true"
+    - key: "theme-variant"
+      value: "'dark'"
+    - key: "window-style"
+      value: "'normal'"
+    - key: "keybindings/session-add-down"
+      value: "'<Primary><Shift>o'"
+    - key: "keybindings/session-add-right"
+      value: "'<Primary><Shift>e'"
+    - key: "keybindings/session-open"
+      value: "'disabled'"
+
+- name: Disable emoji hotkey
+  dconf:
+    key: "/desktop/ibus/panel/emoji/hotkey"
+    value: "@as []"

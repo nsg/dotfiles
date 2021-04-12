@@ -137,6 +137,7 @@
   tasks:
     - include: configure/vim_plugins.yml
     - include: configure/dotfiles.yml
+    - include: configure/dconf.yml
 
     - name: "Make sure we have ~/bin"
       file:
