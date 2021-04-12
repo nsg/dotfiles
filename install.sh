@@ -62,7 +62,7 @@ install_package gcc
 
 if [ ! -e "$SCRIPTPATH/.env/bin/ansible" ]; then
 	message "Install ansible with pip"
-	pip install ansible==2.9.5
+	pip install ansible==2.9.19
 fi
 
 export ANSIBLE_NOCOWS=1 # kill the cow!

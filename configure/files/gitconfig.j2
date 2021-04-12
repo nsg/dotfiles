@@ -1,5 +1,5 @@
 [user]
-	email = nsg@nsg.cc
+	email = {{ user_email }}
 	name = Stefan Berggren
 [push]
 	default = simple
@@ -19,4 +19,4 @@
 	updatesubmodules = "submodule update --init --recursive"
 	rebasestash = "!git stash && git rebase -i && git stash pop"
 [core]
-	excludesfile = /home/nsg/.gitignore
+	excludesfile = {{ ansible_env.HOME }}/.gitignore

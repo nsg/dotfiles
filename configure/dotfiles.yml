@@ -1,5 +1,13 @@
 ---
 
+- set_fact:
+    user_email: >-
+      {% if ansible_hostname | regex_search("^L") %}
+      stefan.berggren@{{ ansible_domain }}
+      {% else %}
+      {{ 'nsg' + '@' + 'nsg' + '.cc' }}
+      {% endif %}
+
 - name: Make directories
   file:
     path: "~/.{{ item }}"
@@ -21,8 +29,14 @@
     - config/nvim/init.vim
     - config/yamllint/config
     - mplayer/config
-    - gitconfig
     - gitignore
+
+- name: "Deploy files (template)"
+  template:
+    src: "configure/files/{{ item }}.j2"
+    dest: "~/.{{ item }}"
+  loop:
+    - gitconfig
 
 - name: "Deploy directories (copy)"
   copy:

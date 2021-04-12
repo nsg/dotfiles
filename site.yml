@@ -13,8 +13,6 @@
   hosts: all
   become: yes
   tasks:
-    - include: install/github-hub.yml
-
     - name: Install misc software
       apt:
         name:
@@ -40,7 +38,6 @@
         name: "{{ item }}"
         classic: yes
       loop:
-        - code
         - snapcraft
 
     - name: Add flathub repo
@@ -60,6 +57,13 @@
           - cmake
           - heimdal-clients
           - docker.io
+
+    - name: Install classic snaps
+      snap:
+        name: "{{ item }}"
+        classic: yes
+      loop:
+        - code
 
 - name: Tweaks for my T490
   hosts:
