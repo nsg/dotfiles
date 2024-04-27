@@ -1,0 +1,7 @@
+{
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.autoClosingOvertype": "never",
+    "files.insertFinalNewline": true,
+    "workbench.tree.indent": 20
+}

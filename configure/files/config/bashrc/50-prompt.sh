@@ -25,14 +25,10 @@ case "$TERM" in
         ;;
 esac
 
-# https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
+# https://gnunn1.github.io/tilix-web/manual/vteconfig/
 # The function is called from post_prompt
-if [[ $TILIX_ID ]] || [[ $TERMINIX_ID ]]; then
-    if [ -e /etc/profile.d/vte.sh ]; then
-        . /etc/profile.d/vte.sh
-    elif [ -e /etc/profile.d/vte-*.sh ]; then
-        . /etc/profile.d/vte-*.sh
-    fi
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+    source /etc/profile.d/vte*.sh
 fi
 
 pre_prompt() {
@@ -58,9 +54,6 @@ post_prompt() {
 
     local yellow=$(tput setaf 3)
     local white=$(tput setaf 7)
-
-    # Output control chars for VTE terminals
-    declare -f __vte_osc7 > /dev/null && __vte_osc7
 
     echo -en $yellow
 
@@ -115,6 +108,7 @@ set_prompt() {
     PS1="${PS1}\033[0;${r_prompt_move}H"  # Move cursor to top right corner
     PS1="${PS1}${r_prompt}"               # Print right prompt
     PS1="${PS1}\033[u\]"                  # Return to saved position
+    PS1="${PS1}$(__vte_osc7)"             # Needed for VTE terminals like Tilix
 }
 
 prompt_command() {
