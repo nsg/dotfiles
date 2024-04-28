@@ -51,20 +51,22 @@ install_snap_package chromium
 
 flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-#
-# Install and configure Incus
-#
-install_package incus
-add_user_to_group $USER incus
-if ! zfs list | grep -q pool/data/incus; then
-    sudo incus admin init --auto --storage-backend zfs --storage-pool pool/data/incus
-fi
+if zfs list | grep -q pool/data; then
+    #
+    # Install and configure Incus
+    #
+    install_package incus
+    add_user_to_group $USER incus
+    if ! zfs list | grep -q pool/data/incus; then
+        sudo incus admin init --auto --storage-backend zfs --storage-pool pool/data/incus
+    fi
 
-#
-# Install and configure LXD
-#
-install_snap_package lxd
-add_user_to_group $USER lxd
-if ! zfs list | grep -q pool/data/lxd; then
-    sudo lxd init --auto --storage-backend zfs --storage-pool pool/data/lxd
+    #
+    # Install and configure LXD
+    #
+    install_snap_package lxd
+    add_user_to_group $USER lxd
+    if ! zfs list | grep -q pool/data/lxd; then
+        sudo lxd init --auto --storage-backend zfs --storage-pool pool/data/lxd
+    fi
 fi
