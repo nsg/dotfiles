@@ -37,6 +37,7 @@ install_package jq
 install_package podman
 install_package nvme-cli
 install_package python3-virtualenv
+install_package distrobox
 
 install_classic_snap_package snapcraft
 install_classic_snap_package code
