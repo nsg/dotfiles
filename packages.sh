@@ -48,6 +48,8 @@ install_package htop
 install_classic_snap_package snapcraft
 install_classic_snap_package code
 install_snap_package chromium
+install_snap_package thunderbird
+install_snap_package spotify
 
 flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
