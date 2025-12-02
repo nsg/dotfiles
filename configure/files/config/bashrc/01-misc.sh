@@ -5,7 +5,7 @@ if [ -x /usr/bin/lesspipe ]; then
 fi
 
 if [ -x /usr/bin/dircolors ]; then
-    eval "`dircolors -b`"
+    eval "$(dircolors -b)"
     alias ls='ls --color=auto'
 fi
 
@@ -18,4 +18,3 @@ fi
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
 fi
-
