@@ -1,0 +1,61 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """$sudo$python$username$hostname$directory$git_branch$git_state$jobs$cmd_duration$status$character"""
+
+[sudo]
+disabled = false
+format = '[$symbol]($style)'
+symbol = '# '    # sudo credentials cached
+style = 'bold yellow'
+
+[status]
+disabled = false
+format = ' [$symbol$status]($style)'
+symbol = 'x'    # command failed
+style = 'bold red'
+
+[username]
+style_user = 'bold green'
+style_root = 'bold red'
+format = '[$user@]($style)'
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '[$hostname ]($style)'
+style = 'bold green'
+
+[directory]
+style = 'bold blue'
+truncation_length = 1
+truncate_to_repo = false
+format = '[$path]($style)'
+
+[git_branch]
+format = ' [$branch]($style)'
+style = 'yellow'
+
+[git_state]
+format = '[$state( $progress_current/$progress_total)]($style) '
+style = 'bold yellow'
+
+[python]
+format = '[$virtualenv ]($style)'
+style = 'yellow'
+
+[jobs]
+format = '[$symbol$number]($style)'
+symbol = 'j:'
+style = 'white'
+
+[cmd_duration]
+min_time = 2000
+format = ' [$duration]($style)'
+style = 'yellow'
+
+[character]
+success_symbol = ' [\$](white)'
+error_symbol = ' [\$](bold red)'
