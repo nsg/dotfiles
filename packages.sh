@@ -43,6 +43,7 @@ install_package podman
 install_package nvme-cli
 install_package python3-virtualenv
 install_package distrobox
+install_package lm-sensors
 install_package htop
 
 install_classic_snap_package snapcraft
@@ -53,14 +54,14 @@ install_snap_package spotify
 
 flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-if zfs list | grep -q pool/data; then
+if zfs list | grep -q rpool/data; then
     #
     # Install and configure Incus
     #
     install_package incus
     add_user_to_group $USER incus
-    if ! zfs list | grep -q pool/data/incus; then
-        sudo incus admin init --auto --storage-backend zfs --storage-pool pool/data/incus
+    if ! zfs list | grep -q rpool/data/incus; then
+        sudo incus admin init --auto --storage-backend zfs --storage-pool rpool/data/incus
     fi
 
     #
@@ -68,7 +69,7 @@ if zfs list | grep -q pool/data; then
     #
     install_snap_package lxd
     add_user_to_group $USER lxd
-    if ! zfs list | grep -q pool/data/lxd; then
-        sudo lxd init --auto --storage-backend zfs --storage-pool pool/data/lxd
+    if ! zfs list | grep -q rpool/data/lxd; then
+        sudo lxd init --auto --storage-backend zfs --storage-pool rpool/data/lxd
     fi
 fi
