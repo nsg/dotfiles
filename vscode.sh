@@ -13,6 +13,7 @@ vscode_install_extension redhat.vscode-yaml
 vscode_install_extension ms-python.python
 vscode_install_extension github.copilot
 vscode_install_extension streetsidesoftware.code-spell-checker
+vscode_install_extension tamasfe.even-better-toml
 
 mkdir -p ~/.config/Code/User
 cp -v configure/files/vscode/settings.json \

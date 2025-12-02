@@ -3,5 +3,7 @@
     "editor.autoClosingQuotes": "never",
     "editor.autoClosingOvertype": "never",
     "files.insertFinalNewline": true,
-    "workbench.tree.indent": 20
+    "workbench.tree.indent": 20,
+    "workbench.externalBrowser": "/usr/bin/firefox",
+    "github.copilot.nextEditSuggestions.enabled": true
 }
