@@ -3,7 +3,7 @@
 set -euo pipefail
 
 vscode_install_extension() {
-    if ! code --list-extensions | grep -E "^$1\$" &> /dev/null; then
+    if ! code --list-extensions | grep -ixF "$1" &> /dev/null; then
         code --install-extension "$1"
     fi
 }
@@ -18,7 +18,6 @@ vscode_install_extension ms-vscode.makefile-tools
 
 # AI related extensions
 vscode_install_extension ms-vscode.vscode-speech
-vscode_install_extension github.copilot
 vscode_install_extension github.copilot-chat
 
 mkdir -p ~/.config/Code/User
