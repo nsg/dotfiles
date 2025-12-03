@@ -2,8 +2,57 @@
     "editor.autoClosingBrackets": "never",
     "editor.autoClosingQuotes": "never",
     "editor.autoClosingOvertype": "never",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications",
+    "editor.aiStats.enabled": true,
     "files.insertFinalNewline": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 5000,
+    "files.autoSaveWhenNoErrors": true,
     "workbench.tree.indent": 20,
     "workbench.externalBrowser": "/usr/bin/firefox",
-    "github.copilot.nextEditSuggestions.enabled": true
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "accessibility.voice.speechTimeout": 0,
+    "githubPullRequests.pullBranch": "never",
+
+    "chat.todoListTool.enabled": true,
+    "chat.agent.maxRequests": 250,
+    "chat.tools.terminal.autoApprove": {
+        "make serve": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "make stop": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "npm run build": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "cargo fmt": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "cargo clippy": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "cargo build": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "cargo test": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "cargo audit": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "./tests/inspect-ci-build.sh": true,
+        "./tests/diff-upstream-changes.sh": true
+    }
+
 }
