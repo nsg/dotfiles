@@ -21,6 +21,8 @@ dconf write /desktop/ibus/panel/emoji/hotkey "@as []"
 #
 # Gnome configuration
 #
+dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+dconf write /org/gnome/desktop/interface/gtk-theme "'Yaru-dark'"
 dconf write /org/gnome/desktop/wm/preferences/mouse-button-modifier "'<Alt>'"
 dconf write /org/gnome/desktop/wm/preferences/focus-mode "'sloppy'"
 dconf write /org/gnome/shell/extensions/ding/show-home false
