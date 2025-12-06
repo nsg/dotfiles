@@ -23,3 +23,6 @@ dconf write /desktop/ibus/panel/emoji/hotkey "@as []"
 #
 dconf write /org/gnome/desktop/wm/preferences/mouse-button-modifier "'<Alt>'"
 dconf write /org/gnome/desktop/wm/preferences/focus-mode "'sloppy'"
+dconf write /org/gnome/shell/extensions/ding/show-home false
+dconf write /org/gnome/shell/extensions/ding/show-trash false
+dconf write /org/gnome/shell/extensions/ding/show-volumes false
