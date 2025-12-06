@@ -26,3 +26,6 @@ dconf write /org/gnome/desktop/wm/preferences/focus-mode "'sloppy'"
 dconf write /org/gnome/shell/extensions/ding/show-home false
 dconf write /org/gnome/shell/extensions/ding/show-trash false
 dconf write /org/gnome/shell/extensions/ding/show-volumes false
+dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed false
+dconf write /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size 38
+dconf write /org/gnome/shell/extensions/tiling-assistant/enable-tiling-popup false
