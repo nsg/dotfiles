@@ -26,6 +26,21 @@ add_user_to_group() {
     fi
 }
 
+install_gh_release() {
+    local repo="$1"
+    local version="$2"
+    local file="$3"
+    local dest="$4"
+
+    mkdir -p "$dest"
+    curl -sL "https://github.com/$repo/releases/download/$version/$file" | \
+        case "$file" in
+            *.tar.gz|*.tgz) tar -xzf - -C "$dest" --strip-components=1 ;;
+            *.tar.xz) tar -xJf - -C "$dest" --strip-components=1 ;;
+            *.zip) funzip | tar -xf - -C "$dest" ;;
+        esac
+}
+
 install_package neovim
 install_package curl
 install_package tig
@@ -36,6 +51,7 @@ install_package mpv
 install_package tilix
 install_package dconf-editor
 install_package hub
+install_package gh
 install_package flatpak
 install_package gnome-software-plugin-flatpak
 install_package jq
@@ -51,6 +67,8 @@ install_classic_snap_package code
 install_snap_package chromium
 install_snap_package thunderbird
 install_snap_package spotify
+
+install_gh_release astral-sh/uv 0.9.15 uv-x86_64-unknown-linux-gnu.tar.gz "$HOME/bin"
 
 flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
