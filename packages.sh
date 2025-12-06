@@ -71,6 +71,7 @@ install_snap_package spotify
 install_gh_release astral-sh/uv 0.9.15 uv-x86_64-unknown-linux-gnu.tar.gz "$HOME/bin"
 
 flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --user -y flathub com.mattjakeman.ExtensionManager
 
 if zfs list | grep -q rpool/data; then
     #
